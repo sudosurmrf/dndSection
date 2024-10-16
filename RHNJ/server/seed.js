@@ -1,6 +1,7 @@
 const { createCharacter, createUser } = require("./db");
 
 const init = async()=> {
+    try {
     await client.connect();
     console.log('connected to database');
     await createTables();
@@ -32,6 +33,7 @@ const init = async()=> {
     });
   } catch (err) {
     console.error('Error during initialization:', err);
+  }
   };
 
 init();
