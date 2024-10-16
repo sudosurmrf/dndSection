@@ -12,9 +12,9 @@ const createTables = async()=> {
     CREATE TABLE users(
       id UUID PRIMARY KEY,
       username VARCHAR(20) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL
+      password VARCHAR(20) NOT NULL
       dmaccess BOOLEAN DEFAULT FALSE
-      adimaccess BOOLEAN DEFAULT FALSE
+      adminaccess BOOLEAN DEFAULT FALSE
       created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     CREATE TABLE usercharacter(
@@ -38,9 +38,9 @@ const createTables = async()=> {
   await client.query(SQL);
 };
 
-const createUser = async({ username, password})=> {
+const createUser = async({ username, password, dmaccess, adminaccess})=> {
     const SQL = `
-        INSERT INTO users(id, username, password) VALUES($1, $2, $3) RETURNING *
+        INSERT INTO users(id, username, password, dmaccess, adminaccess) VALUES($1, $2, $3, $4, $5) RETURNING *
     `;
     const response = await client.query(SQL, [uuid.v4(), username, await bcrypt.hash(password, 10)]);
     return response.rows[0];
@@ -70,13 +70,13 @@ const authenticate = async({ username, password })=> {
     throw error;
 };
 
-/* const createToken = (user)=> {
+const createToken = (user)=> {
     return jwt.sign({ id: user.id, username: user.username }, JWT);
 }
 
 const verifyToken = (token)=> {
     return jwt.verify(token, JWT);
-} */
+} 
 
 
 
@@ -154,5 +154,7 @@ module.exports = {
     updateCharacter,
     fetchUsers,
     fetchCharacters,
-    findUserFromToken
+    findUserFromToken,
+    createToken,
+    verifyToken
 };
