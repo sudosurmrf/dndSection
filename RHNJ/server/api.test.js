@@ -9,10 +9,13 @@ let userId;
 let token;
 let characterId;
 
-beforeAll(async () => {
-  app = createServer();
-  await prisma.$connect();
-});
+/* beforeAll(async () => {
+  
+}); */
+
+app = createServer();
+  /* await prisma.$connect(); */
+
 
 beforeEach(async () => {
   await prisma.userCharacter.deleteMany({});

@@ -1,16 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
-<<<<<<< Updated upstream
-const { hash } = require('../client/node_modules/@types/bcrypt');
-const express = require('../client/node_modules/@types/express');
-
-const prisma = new PrismaClient();
-const PORT = process.env.PORT || 3000;
-const app = express();
-=======
 const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
 
->>>>>>> Stashed changes
 
 const init = async () => {
   try {
@@ -21,21 +12,6 @@ const init = async () => {
     // Create users with hashed passwords
     const users = await Promise.all([
       prisma.user.create({
-<<<<<<< Updated upstream
-        data: { username: 'admin1', password: await hash('testing123', 10) },
-      }),
-      prisma.user.create({
-        data: { username: 'admin2', password: await hash('testing789', 10) },
-      }),
-      prisma.user.create({
-        data: { username: 'user1', password: await hash('getf@cked', 10) },
-      }),
-      prisma.user.create({
-        data: { username: 'user2', password: await hash('likesisters', 10) },
-      }),
-      prisma.user.create({
-        data: { username: 'user3', password: await hash('suckit', 10) },
-=======
         data: { username: 'admin1', password: await bcrypt.hash('testing123', 10) },
       }),
       prisma.user.create({
@@ -49,7 +25,6 @@ const init = async () => {
       }),
       prisma.user.create({
         data: { username: 'user3', password: await bcrypt.hash('suckit', 10) },
->>>>>>> Stashed changes
       }),
     ]);
     console.log('Created users:', users);
@@ -146,16 +121,8 @@ const init = async () => {
     console.log('Created characters:', characters);
     console.log('Data seeded');
 
-<<<<<<< Updated upstream
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('Error during initialization:', err);
-=======
    } catch (err) {
     console.error('Error during seeding:', err);
->>>>>>> Stashed changes
   } finally {
     await prisma.$disconnect();
   }
