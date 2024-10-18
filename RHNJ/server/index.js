@@ -58,13 +58,12 @@ app.post('/api/auth/signup', async (req, res, next) => {
       data: { username, password: hashedPassword },
     });
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    await client.query(
-      'INSERT INTO users (id, name, password,token) VALUES ($1, $2, $3, $4)',
-      [id, name, hashedPassword, token]
-    );
-    res.json('user created');
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { token }
+    });
 
-    res.status(201).send(user);
+    res.status(201).json({ message: 'User created', user, token });
   } catch (error) {
     next(error);
   }
@@ -79,7 +78,7 @@ app.post('/api/auth/login', async (req, res, next) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).send({ error: 'Invalid credentials' });
     }
-
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);   //added this in
     res.send({ user, token });
   } catch (error) {
     next(error);
