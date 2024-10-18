@@ -18,14 +18,16 @@ app.use(express.json());
 //   }
 // }
 
-// Middlewareß
+// Middleware
 const isLoggedIn = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
+    console.log('authorized', req.headers);
     if (!token) return res.status(401).send({ error: 'Unauthorized' });
     console.log('testing jwt secret', process.env.JWT_SECRET);
     console.log('testing token value', token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('decoded', decoded);
     const userId = decoded.id;
 
     const user = await prisma.user.findUnique({
@@ -46,10 +48,6 @@ const isLoggedIn = async (req, res, next) => {
     next(error);
   }
 };
-
-function createServer() {
-  return app;
-}
 
 // Sign-up
 app.post('/api/auth/signup', async (req, res, next) => {
@@ -194,4 +192,8 @@ const init = async () => {
 };
 
 init();
+function createServer() {
+  return app;
+}
+
 module.exports = { createServer };

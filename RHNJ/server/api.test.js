@@ -42,12 +42,14 @@ describe('API Routes', () => {
     userId = response.body.id;
   });
 
-  test('POST /api/auth/login - should log in the user', async () => {
-    const fakeToken = jwt.sign({ id: 1 }, 'itsLeviosaaaa');
-    console.log(fakeToken);
+  test.only('POST /api/auth/login - should log in the user', async () => {
+    // const fakeToken = jwt.sign({ id: 1 }, 'itsLeviosaaaa');
+    // console.log(fakeToken);
+    // const tokenString = `Bearer ${fakeToken}`;
+    // console.log('this is a tokenString', tokenString);
     const response = await request(app)
       .post('/api/auth/login')
-      .set('Authorization', `Bearer ${fakeToken}`)
+      //   .set('Authorization', tokenString)
       .send(userData);
     expect(response.status).toBe(200);
     expect(response.body.username).toBe(userData.username);
