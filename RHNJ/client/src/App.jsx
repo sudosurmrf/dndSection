@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import "./App.css";
+import { useState, useEffect } from "react";
+import AboutCharacter from "./components/AboutCharacter";
 
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
