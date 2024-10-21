@@ -1,8 +1,8 @@
 const request = require('supertest');
 const { PrismaClient } = require('@prisma/client');
-const { createServer } = require('./index');
-const prisma = new PrismaClient();
-const jwt = require('jsonwebtoken');
+const { prisma: prismaClient, createServer } = require('./index');
+// const prisma = new PrismaClient();
+// const jwt = require('jsonwebtoken');
 
 let app;
 let userId;
@@ -11,16 +11,63 @@ let characterId;
 
 beforeAll(async () => {
   app = createServer();
-  await prisma.$connect();
+  await prismaClient.$connect();
 });
 
 beforeEach(async () => {
-  await prisma.userCharacter.deleteMany({});
-  await prisma.user.deleteMany({});
+  await prismaClient.userCharacter.deleteMany({});
+  await prismaClient.user.deleteMany({});
+
+  // Log current users to confirm deletion
+  const users = await prismaClient.user.findMany();
+  console.log('Current Users:', users);
+
+  // Generate a unique username for each test
+  const userData = {
+    username: `testuser-${Date.now()}`, // Ensures a unique username
+    password: 'testpassword',
+  };
+
+  // Sign up a new user
+  const response = await request(app)
+    .post('/api/auth/signup')
+    .send({ username: 'testuser', password: 'testpassword' });
+
+  userId = response.body.id;
+
+  // Log in to get the token
+  const userResponse = await request(app)
+    .post('/api/auth/login')
+    .send({ username: 'testuser', password: 'testpassword' });
+
+  token = userResponse.body.token;
+
+  // Create a character
+  const characterResponse = await request(app)
+    .post('/api/characters')
+    .set('Authorization', `Bearer ${token}`)
+    .send({ name: 'Test Character' });
+
+  console.log('Character Creation Response:', characterResponse.body);
+
+  // Create a character
+  await request(app)
+    .post('/api/characters')
+    .set('Authorization', `Bearer ${token}`)
+    .send({ name: 'Test Character' });
 });
 
 afterAll(async () => {
-  await prisma.$disconnect();
+  await prismaClient.$disconnect();
+});
+
+test('Get current user', async () => {
+  const response = await request(app)
+    .get('/api/auth/me')
+    .set('Authorization', `Bearer ${token}`);
+
+  expect(response.status).toBe(200);
+  expect(response.body.username).toBe('testuser');
 });
 
 describe('API Routes', () => {
@@ -32,28 +79,22 @@ describe('API Routes', () => {
   test('POST /api/auth/signup - should create a new user', async () => {
     const response = await request(app).post('/api/auth/signup').send(userData);
 
-    // const response = await request(app)
-    //   .post('/api/auth/signup')
-    //   .set(send(userData));
-    //   .set('Authorization', `Bearer ${token}`);
+    if (response.status !== 201) {
+      console.error('Signup failed:', response.body);
+    }
 
     expect(response.status).toBe(201);
     expect(response.body.username).toBe(userData.username);
     userId = response.body.id;
   });
 
-  test.only('POST /api/auth/login - should log in the user', async () => {
-    // const fakeToken = jwt.sign({ id: 1 }, 'itsLeviosaaaa');
-    // console.log(fakeToken);
-    // const tokenString = `Bearer ${fakeToken}`;
-    // console.log('this is a tokenString', tokenString);
-    const response = await request(app)
-      .post('/api/auth/login')
-      //   .set('Authorization', tokenString)
-      .send(userData);
+  test('POST /api/auth/login - should log in the user', async () => {
+    const response = await request(app).post('/api/auth/login').send(userData);
     expect(response.status).toBe(200);
     expect(response.body.username).toBe(userData.username);
+    expect(response.body.token).toBeDefined();
     token = response.body.token;
+    console.log('Generated token:', token);
   });
 
   test('GET /api/auth/me - should return the current user', async () => {
@@ -61,7 +102,7 @@ describe('API Routes', () => {
       .get('/api/auth/me')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
-    expect(response.body.username).toBe(userData.username);
+    expect(response.body.username).toBe('testuser');
   });
 
   test('POST /api/characters - should create a new character', async () => {
@@ -108,30 +149,48 @@ test('DELETE /api/auth/me - should delete the current user', async () => {
 
   expect(response.status).toBe(204);
 
-  const deletedUser = await prisma.user.findUnique({ where: { id: userId } });
+  const deletedUser = await prismaClient.user.findUnique({
+    where: { id: userId },
+  });
   expect(deletedUser).toBeNull();
 });
 
 test('DELETE /api/characters/:id - should delete the character', async () => {
-  const response = await request(app)
+  const createResponse = await request(app)
+    .post('/api/characters')
+    .set('Authorization', `Bearer ${token}`)
+    .send({
+      characterName: 'May',
+      characterClass: 'Rogue',
+      characterLevel: 5,
+      characterImage: 'image',
+      strength: 10,
+      dexterity: 20,
+      constitution: 15,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 15,
+      statusPoints: 5,
+      abilities: ['sneak', 'steal', 'stab'],
+    });
+
+  expect(createResponse.status).toBe(201);
+  const characterId = createResponse.body.id; // Ensure this is set correctly
+
+  const deleteResponse = await request(app)
     .delete(`/api/characters/${characterId}`)
     .set('Authorization', `Bearer ${token}`);
 
-  expect(response.status).toBe(204);
+  expect(deleteResponse.status).toBe(204);
 
-  const deletedCharacter = await prisma.userCharacter.findUnique({
-    where: { id: characterId },
-  });
-  expect(deletedCharacter).toBeNull();
+  const getResponse = await request(app)
+    .get(`/api/characters/${characterId}`)
+    .set('Authorization', `Bearer ${token}`);
+
+  expect(getResponse.status).toBe(404); // Should return 404 if character was deleted
 });
 
 test('PUT /api/characters/:id - should update the character', async () => {
-  const characterData = {
-    characterName: 'Updated May',
-    characterClass: 'Mage',
-    characterLevel: 6,
-  };
-
   const createResponse = await request(app)
     .post('/api/characters')
     .set('Authorization', `Bearer ${token}`)
@@ -151,6 +210,12 @@ test('PUT /api/characters/:id - should update the character', async () => {
     });
 
   characterId = createResponse.body.id;
+
+  const characterData = {
+    characterName: 'Updated May',
+    characterClass: 'Mage',
+    characterLevel: 6,
+  };
 
   const updateResponse = await request(app)
     .put(`/api/characters/${characterId}`)
@@ -181,5 +246,12 @@ test('POST /api/auth/login - should return 401 for invalid credentials', async (
 
 test('GET /api/auth/me - should return 401 if not logged in', async () => {
   const response = await request(app).get('/api/auth/me');
+  expect(response.status).toBe(401);
+});
+
+test('GET /api/auth/me - should return 401 for invalid token', async () => {
+  const response = await request(app)
+    .get('/api/auth/me')
+    .set('Authorization', 'Bearer invalid_token');
   expect(response.status).toBe(401);
 });

@@ -1,10 +1,11 @@
 const { PrismaClient } = require('@prisma/client');
-const { hash } = require('../client/node_modules/@types/bcrypt');
-const express = require('../client/node_modules/@types/express');
+const { hash } = require('bcrypt');
+const express = require('express');
 
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 const app = express();
+require('dotenv').config();
 
 const init = async () => {
   try {
