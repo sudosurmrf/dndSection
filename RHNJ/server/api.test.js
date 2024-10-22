@@ -14,6 +14,12 @@ beforeAll(async () => {
   await prismaClient.$connect();
 });
 
+// Generate a unique username for each test
+const userData = {
+  username: `testuser-${Date.now()}`,
+  password: 'testpassword',
+};
+
 beforeEach(async () => {
   await prismaClient.userCharacter.deleteMany({});
   await prismaClient.user.deleteMany({});
@@ -21,12 +27,6 @@ beforeEach(async () => {
   // Log current users to confirm deletion
   const users = await prismaClient.user.findMany();
   console.log('Current Users:', users);
-
-  // Generate a unique username for each test
-  const userData = {
-    username: `testuser-${Date.now()}`, // Ensures a unique username
-    password: 'testpassword',
-  };
 
   // Sign up a new user
   const response = await request(app)
@@ -46,15 +46,23 @@ beforeEach(async () => {
   const characterResponse = await request(app)
     .post('/api/characters')
     .set('Authorization', `Bearer ${token}`)
-    .send({ name: 'Test Character' });
+    .send({
+      characterName: 'Test Character',
+      characterClass: 'Rogue',
+      characterLevel: 5,
+      characterImage: 'image',
+      strength: 10,
+      dexterity: 20,
+      constitution: 15,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 15,
+      statusPoints: 5,
+      abilities: ['sneak', 'steal', 'stab'],
+    });
 
   console.log('Character Creation Response:', characterResponse.body);
-
-  // Create a character
-  await request(app)
-    .post('/api/characters')
-    .set('Authorization', `Bearer ${token}`)
-    .send({ name: 'Test Character' });
+  characterId = characterResponse.body.id;
 });
 
 afterAll(async () => {
@@ -236,22 +244,24 @@ test('GET /api/users - should return all users', async () => {
 });
 
 // Error handling tests
-test('POST /api/auth/login - should return 401 for invalid credentials', async () => {
-  const response = await request(app).post('/api/auth/login').send({
-    username: 'wronguser',
-    password: 'wrongpassword',
+describe('Error Handling', () => {
+  test('POST /api/auth/login - should return 401 for invalid credentials', async () => {
+    const response = await request(app).post('/api/auth/login').send({
+      username: 'wronguser',
+      password: 'wrongpassword',
+    });
+    expect(response.status).toBe(401);
   });
-  expect(response.status).toBe(401);
-});
 
-test('GET /api/auth/me - should return 401 if not logged in', async () => {
-  const response = await request(app).get('/api/auth/me');
-  expect(response.status).toBe(401);
-});
+  test('GET /api/auth/me - should return 401 if not logged in', async () => {
+    const response = await request(app).get('/api/auth/me');
+    expect(response.status).toBe(401);
+  });
 
-test('GET /api/auth/me - should return 401 for invalid token', async () => {
-  const response = await request(app)
-    .get('/api/auth/me')
-    .set('Authorization', 'Bearer invalid_token');
-  expect(response.status).toBe(401);
+  test('GET /api/auth/me - should return 401 for invalid token', async () => {
+    const response = await request(app)
+      .get('/api/auth/me')
+      .set('Authorization', 'Bearer invalid_token');
+    expect(response.status).toBe(401);
+  });
 });

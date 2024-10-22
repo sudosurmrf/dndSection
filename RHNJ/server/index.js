@@ -43,6 +43,7 @@ function authMiddleware(req, res, next) {
         return res.sendStatus(401);
       }
       req.user = user;
+      console.log('Authenticated user:', req.user);
       next();
     });
   } else {
@@ -122,9 +123,21 @@ function createServer() {
   // Delete current user
   app.delete('/api/auth/me', authMiddleware, async (req, res, next) => {
     try {
+      console.log('Attempting to delete user with ID:', req.user.id);
+
+      const userExists = await prisma.user.findUnique({
+        where: { id: req.user.id },
+      });
+
+      if (!userExists) {
+        console.error('User not found for deletion:', req.user.id);
+        return res.sendStatus(404);
+      }
+
       await prisma.user.delete({ where: { id: req.user.id } });
       res.sendStatus(204);
     } catch (error) {
+      console.error('Error deleting user:', error);
       next(error);
     }
   });
