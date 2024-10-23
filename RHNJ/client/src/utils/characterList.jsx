@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react"; 
-import aboutCharacter from "./AboutCharacters"; 
+import aboutCharacter from "../pages/AboutCharacters"; 
 
 
-const dummyCharacters = [
+const characters = [
     { id: 1, 
         class: "The Flirt", 
         description: "The Flirt is the life of the party, always knowing exactly what to say (or sing) to capture attention. This Diva uses her charm, wit, seduction and connections to navigate the social scene, throwing extravagant parties and spreading gossip with finesse. She’s the one who smooths over conflicts—or fans the flames with a sly word—while keeping the spotlight on herself. Known for her performances, whether it’s breaking into song at a dinner party or giving a dramatic toast, she thrives in the limelight.", 
@@ -84,4 +84,4 @@ const dummyCharacters = [
         hitPoints: 8 }
   ];
 
-  export dummyCharacters;
+  export characters;
