@@ -84,46 +84,4 @@ const dummyCharacters = [
         hitPoints: 8 }
   ];
 
-/* export default function ContactList({ setSelectedContactId }) { 
-    const [contacts, setContacts] = useState(dummyContacts);
-
-    useEffect(() => {
-        async function fetchContacts() {
-          console.log(contacts)
-          try {
-            const response = await fetch(
-              "https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
-            );
-            const result = await response.json();
-            setContacts(result);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-        fetchContacts();
-      }, []);
-
-    return ( 
-        <table>
-          <thead>
-            <tr>
-              <th colSpan="3">Contact List</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr
-      onClick={() => {
-        setSelectedContactId(contact.id);
-      }}
-    >
-              <td>Name</td>
-              <td>Email</td>
-              <td>Phone</td>
-            </tr>
-            {contacts.map((contact) => {
-          return <ContactRow key={contact.id} contact={contact} />;
-        })}
-          </tbody>
-        </table> */
-    ); 
-}
+  export dummyCharacters;

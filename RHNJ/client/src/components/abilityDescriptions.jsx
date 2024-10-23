@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import aboutCharacter from "./AboutCharacters"; 
 
 
-const dummyAbilitiess = [
+const dummyAbilities = [
     { id: 1, 
         abilityName: "minorIllusion", 
         description: "The ability to create fake stories or gossip that stir up drama without anyone knowing where it came from. Lasts at least 1 minute of in-game time.", 
@@ -257,3 +257,4 @@ const dummyAbilitiess = [
     
   ];
 
+export dummyAbilities;
