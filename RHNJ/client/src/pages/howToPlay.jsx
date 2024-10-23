@@ -1,6 +1,6 @@
 import React from "react"; 
 
-export default function aboutCharacter({ setSelectedCharacterID, character }) {
+export default function howToPlay() {
     return (
         <div>
       <h1> How to Plan Dungeons and Divas:</h1>

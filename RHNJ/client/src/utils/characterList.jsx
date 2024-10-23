@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react"; 
-import aboutCharacter from "./AboutCharacters"; 
+import aboutCharacter from "../pages/AboutCharacters"; 
 
 
-const dummyCharacters = [
+const characters = [
     { id: 1, 
         class: "The Flirt", 
         description: "The Flirt is the life of the party, always knowing exactly what to say (or sing) to capture attention. This Diva uses her charm, wit, seduction and connections to navigate the social scene, throwing extravagant parties and spreading gossip with finesse. She’s the one who smooths over conflicts—or fans the flames with a sly word—while keeping the spotlight on herself. Known for her performances, whether it’s breaking into song at a dinner party or giving a dramatic toast, she thrives in the limelight.", 
@@ -84,46 +84,4 @@ const dummyCharacters = [
         hitPoints: 8 }
   ];
 
-/* export default function ContactList({ setSelectedContactId }) { 
-    const [contacts, setContacts] = useState(dummyContacts);
-
-    useEffect(() => {
-        async function fetchContacts() {
-          console.log(contacts)
-          try {
-            const response = await fetch(
-              "https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
-            );
-            const result = await response.json();
-            setContacts(result);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-        fetchContacts();
-      }, []);
-
-    return ( 
-        <table>
-          <thead>
-            <tr>
-              <th colSpan="3">Contact List</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr
-      onClick={() => {
-        setSelectedContactId(contact.id);
-      }}
-    >
-              <td>Name</td>
-              <td>Email</td>
-              <td>Phone</td>
-            </tr>
-            {contacts.map((contact) => {
-          return <ContactRow key={contact.id} contact={contact} />;
-        })}
-          </tbody>
-        </table> */
-    ); 
-}
+  export characters;

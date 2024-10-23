@@ -1,9 +1,8 @@
-/* TODO - add your code to create a functional React component that renders a registration form */
 /* import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'; 
 
-const API_URL = `??????`;
+const API_URL = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register`;
 
 function Register({token, setToken}){
       

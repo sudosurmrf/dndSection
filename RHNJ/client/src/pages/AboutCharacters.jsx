@@ -5,7 +5,7 @@ export default function aboutCharacter({ setSelectedCharacterID, character }) {
       <tr onClick={() => setSelectedCharacterID(character.id)}>
         <td>{character.image}</td>
         <td>{character.class}</td>
-        <td>{Character.description}</td>
+        <td>{character.description}</td>
       </tr>
     );
   }
