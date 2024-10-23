@@ -1,24 +1,24 @@
 const { PrismaClient } = require('@prisma/client');
-const { hash, compare } = require('../client/node_modules/@types/bcrypt');
-const jwt = require('../client/node_modules/@types/jsonwebtoken');
+const { hash, compare } = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const prisma = new PrismaClient();
-const JWT = process.env.JWT_SECRET || 'itsLeviosaaaa';
+const JWT_SECRET = process.env.JWT_SECRET || 'itsLeviosaaaa';
 
 // Create user
 const createUser = async ({
   username,
   password,
-  dmAccess = false,
-  adminAccess = false,
+  // dmAccess = false,
+  // adminAccess = false,
 }) => {
   const hashedPassword = await hash(password, 10);
   return await prisma.user.create({
     data: {
       username,
       password: hashedPassword,
-      dmAccess,
-      adminAccess,
+      // dmAccess,
+      // adminAccess,
     },
   });
 };
@@ -69,12 +69,12 @@ const authenticate = async ({ username, password }) => {
 
 // Create JWT token
 const createToken = (user) => {
-  return jwt.sign({ id: user.id, username: user.username }, JWT);
+  return jwt.sign({ id: user.id, username: user.username }, JWT_SECRET);
 };
 
 // Verify JWT token
 const verifyToken = (token) => {
-  return jwt.verify(token, JWT);
+  return jwt.verify(token, JWT_SECRET);
 };
 
 // Function to delete a user
