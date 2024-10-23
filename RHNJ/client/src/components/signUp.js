@@ -1,25 +1,24 @@
-// client/src/components/Login.jsx
+// client/src/components/Signup.js
 import React, { useState } from 'react';
-import { login } from '../api';
+import { signup } from '../api';
 
-const Login = () => {
+const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await login({ username, password });
-      localStorage.setItem('token', response.data.token);
-      console.log('Login successful:', response.data);
-      // Redirect to home or another page
+      const response = await signup({ username, password });
+      console.log('Signup successful:', response.data);
+      // Redirect to login or another page
     } catch (error) {
-      console.error('Login failed:', error.response.data);
+      console.error('Signup failed:', error.response.data);
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSignup}>
       <input
         type='text'
         placeholder='Username'
@@ -34,9 +33,9 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type='submit'>Log In</button>
+      <button type='submit'>Sign Up</button>
     </form>
   );
 };
 
-export default Login;
+export default Signup;
