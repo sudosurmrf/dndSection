@@ -210,3 +210,51 @@ Stat Styling
   margin-bottom: 20px;
 }
 
+/* from https://codepen.io/terminalGradience/pen/ENQRpp /*
+
+body{
+  background-color: #222;
+  color: #CCC;
+}
+
+.vertField{
+  float: left;
+  margin-right: 10px;
+}
+
+td{
+  width: 50px;
+  padding: 2px 5px;
+  background-color: #333;
+  vertical-align: center;
+  text-align: center;
+}
+
+.outcol{
+  width: 75px;
+}
+
+.statfield{
+  width:30px;
+  text-align:center;
+}
+
+.atkfield{
+  width:40px;
+  text-align:center;
+}
+
+form, p{
+  background-color: #333;
+  padding: 5px 10px;
+  margin: 2px;
+  line-height: 175%;
+}
+
+.removeBtn{
+  float:right;
+}
+
+.prototype{
+  display:none;
+}
