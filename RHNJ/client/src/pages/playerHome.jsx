@@ -77,7 +77,7 @@ const PlayerHome = () => {
                 <button onClick={() => handleDelete(character.id)}>
                   Delete
                 </button>
-                {/* Add more actions like Edit if needed */}
+                {/* Add more actions like Edit if needed. text box for notes and flaws and ideals */}
               </td>
             </tr>
           ))}

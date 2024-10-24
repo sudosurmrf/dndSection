@@ -17,7 +17,8 @@ const characters = [
         savingThrows: [dexterity, charisma], 
         skills: [minorIllusion, viciousMockery, charmPerson, detectMagic, healingWord], 
         singleUseSkill: [thunderwave], 
-        hitPoints: 10 },
+        hitPoints: 10,
+        attackRoll: "1 D8 per level"},
 
     { id: 2, 
         class: "The Empath", 
@@ -33,7 +34,8 @@ const characters = [
         savingThrows: [wisdom, charisma], 
         skills: [guidance, mending, bless, healingWord, shieldOfFaith], 
         singleUseSkill: [guidingBolt], 
-        hitPoints: 10 },
+        hitPoints: 10,
+        attackRoll: "1 D8 per level"}
 
     { id: 3, 
         class: "The Confronter", 
@@ -49,7 +51,8 @@ const characters = [
         savingThrows: [strength, charisma], 
         skills: [intimidation, attack, duel, twoHandedWeapon, investigation], 
         singleUseSkill: [actionSurge],
-        hitPoints: 12 },
+        hitPoints: 12,
+        attackRoll: "1 D10 per level"},
 
     { id: 4, 
         class: "The Backstabber", 
@@ -65,7 +68,8 @@ const characters = [
         savingThrows: [dexterity, intelligence], 
         skills: [sneakAttack, thevesCant, disguise, cunningAction, sleightOfHand],
         singleUseSkill: [poison],
-        hitPoints: 10 },
+        hitPoints: 10,
+        attackRoll: "1 D8 per level"},
 
     { id: 5, 
         class: "The Professional", 
@@ -81,7 +85,8 @@ const characters = [
         savingThrows: [intelligence, wisdom], 
         skills: [light, mageHand, RayofFrost, charmPerson, shield], 
         singleUseSkill: [magicMissle],
-        hitPoints: 8 }
+        hitPoints: 8,
+        attackRoll: "1 D6 per level"},
   ];
 
   export characters;
