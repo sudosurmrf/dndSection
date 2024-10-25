@@ -2,7 +2,7 @@
 /* edit user, delete user, edit dm, delete dm */
 /* search all characters, search single character, edit character, delete character */
 // client/src/functions/adminFunctions.jsx
-import { fetchUsers, deleteUser } from '../api';
+import { fetchUsers } from '../api';
 
 export const searchSingleUser = async (userId) => {
   try {
