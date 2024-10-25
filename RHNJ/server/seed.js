@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
-const { hash } = require('bcrypt');
+// const { hash } = require('bcrypt');
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
@@ -16,16 +17,28 @@ const init = async () => {
     // Create users with hashed passwords
     const users = await Promise.all([
       prisma.user.create({
-        data: { username: 'admin1', password: await bcrypt.hash('testing123', 10) },
+        data: {
+          username: 'admin1',
+          password: await bcrypt.hash('testing123', 10),
+        },
       }),
       prisma.user.create({
-        data: { username: 'admin2', password: await bcrypt.hash('testing789', 10) },
+        data: {
+          username: 'admin2',
+          password: await bcrypt.hash('testing789', 10),
+        },
       }),
       prisma.user.create({
-        data: { username: 'user1', password: await bcrypt.hash('getf@cked', 10) },
+        data: {
+          username: 'user1',
+          password: await bcrypt.hash('getf@cked', 10),
+        },
       }),
       prisma.user.create({
-        data: { username: 'user2', password: await bcrypt.hash('likesisters', 10) },
+        data: {
+          username: 'user2',
+          password: await bcrypt.hash('likesisters', 10),
+        },
       }),
       prisma.user.create({
         data: { username: 'user3', password: await bcrypt.hash('suckit', 10) },
@@ -124,8 +137,7 @@ const init = async () => {
 
     console.log('Created characters:', characters);
     console.log('Data seeded');
-
-   } catch (err) {
+  } catch (err) {
     console.error('Error during seeding:', err);
   } finally {
     await prisma.$disconnect();
