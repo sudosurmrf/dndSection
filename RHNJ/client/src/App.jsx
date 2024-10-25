@@ -7,18 +7,22 @@ import AdminHome from "./pages/administratorHome";
 import DMHome from "./pages/dmHome";
 import PlayerHome from "./pages/playerHome";
 import Navigations from "./components/navigations";
+import Home from "./components/home";
+
 
 
 function App() {   
   return (
 <Router>
       <Routes>
-        <Route path='/signup' component={Signup} />
-        <Route path='/login' component={Login} />
-        <Route path='/about-characters' component={AboutCharacters} />
-        <Route path='/admin-home' component={AdminHome} />
-        <Route path='/dm-home' component={DMHome} />
-        <Route path='/player-home' component={PlayerHome} />
+        <Route path='/signup' element={<Signup/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/about-characters' element={<AboutCharacters/>} />
+        <Route path='/admin-home' element={<AdminHome/>} />
+        <Route path='/dm-home' element={<DMHome/>} />
+        <Route path='/player-home' element={<PlayerHome/>} />
+        <Route path='/navigations' element={<Navigations/>} />
+        <Route path='/' element={<Home/>} />
       </Routes>
     </Router>
   );
