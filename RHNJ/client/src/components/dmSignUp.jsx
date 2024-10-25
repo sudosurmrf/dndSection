@@ -1,124 +1,66 @@
-/* import React, { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'; 
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'; // If you're using React Router
+import { dmSignUp } from '../functions/userFunctions'; // Adjust import based on your file structure
 
-const API_URL = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register`;
+const DmSignUp = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(null);
+  const history = useHistory();
 
-function Register({token, setToken}){
-      
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [personId, setPersonId] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault(); 
-
-        try {
-            const response = await fetch(API_URL, {
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                firstname,
-                lastname,
-                email,
-                password
-              })
-            });
-            if (!response.ok) {
-              const errorData = await response.json();
-              setError(errorData.message || 'Registration failed');
-              return;
-          }
-
-          const result = await response.json();
-          if (result.token) {
-            setToken(result.token); 
-            localStorage.setItem('token', result.token); 
-          }
-
-          setPersonId(result.id); 
-          setError(null); 
-          setFirstname('');
-          setLastname('');
-          setEmail('');
-          setPassword('');
-          
-          console.log('Registered person ID:', result.id);
-
-      } catch (error) {
-          setError("Registration error: " + error.message); 
-          console.error("Registration error: ", error); 
-      }
+    try {
+      const newDM = { username, password, email };
+      await dmSignUp(newDM); // Make sure this function exists in your userFunctions
+      history.push('/dm-home'); // Redirect to DM home after successful signup
+    } catch (err) {
+      setError(err.message || 'Signup failed. Please try again.');
+    }
   };
 
+  return (
+    <div>
+      <h2>DM Signup</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor='username'>Username:</label>
+          <input
+            type='text'
+            id='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor='email'>Email:</label>
+          <input
+            type='email'
+            id='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor='password'>Password:</label>
+          <input
+            type='password'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type='submit'>Sign Up</button>
+      </form>
+    </div>
+  );
+};
 
-        return (
-          <div>
-            <h2>Register</h2>
-            <p>{token} {token ? token : "No token available"}</p>
-            {error && <p style={{ color: 'red' }}>{error}</p>} 
-            {personId && <p>Registered successfully with ID: {personId}</p>}
-
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="firstname">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)} 
-                  required
-                />
-              </Form.Group>
-              <br />
-        
-              <Form.Group controlId="lastname">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)} 
-                  required
-                />
-              </Form.Group>
-              <br />
-        
-              <Form.Group controlId="registeremail">
-                <Form.Label>User email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
-                  required
-                />
-              </Form.Group>
-              <br />
-        
-              <Form.Group controlId="user-password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)} 
-                  required
-                />
-              </Form.Group>
-              <br />
-        
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
-            </div>
-            
-          );
-        }
-
-
-
-
-export default Register */
+export default DmSignUp;

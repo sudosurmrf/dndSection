@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
-const { hash } = require('bcrypt');
+// const { hash } = require('bcrypt');
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;

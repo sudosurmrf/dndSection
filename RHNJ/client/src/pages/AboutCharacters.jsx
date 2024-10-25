@@ -1,4 +1,6 @@
-import React from "react"; 
+// client/src/pages/aboutCharacters.jsx
+import React from 'react';
+import characters from "../utils/characterList"; 
 
 export default function aboutCharacter({ setSelectedCharacterID, character }) {
     return (
