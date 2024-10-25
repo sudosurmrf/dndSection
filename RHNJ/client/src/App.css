@@ -44,7 +44,7 @@
 
 
 /*from https://codepen.io/pineapplechunk/pen/AoegBq */ 
-.wrapper {
+/* .wrapper {
   width: 900px;
   height: 600px;
   border-top: 1px solid #e2e2e2;
@@ -83,9 +83,9 @@
   #bt3:hover, #bt2:hover, #bt1:hover {
     opacity: 1;
     transition: opacity ease 100ms;
-  }
+  } */
   
-  .button {
+  /* .button {
     
       width: 100px;
     height: 30px;
@@ -99,9 +99,9 @@
     z-index: 2;
     transition: all ease 100ms;
     /*border-right: 1px solid #7D7D7D;*/
-  }
+  } */
   
-  .button.selected {
+  /* .button.selected {
     top: -40px;
     height: 40px;
     z-index: 1;
@@ -119,23 +119,23 @@
     font-size: 3em;
     letter-spacing: 6px;
     color: #DDDDDD;
-  }
+  } */
   
   /*
   Form Styling
   */
   
-  form {
+/*   form {
     width: 33%;
     height: 600px;
     display: inline-block;
     overflow: hidden;
-  }
+  } */
 
   /*
 Legend Styling
 */
-legend {
+/* legend {
   font-weight: bold;
   font-size: 1.5em;
   color: #7BCAE1;
@@ -147,13 +147,13 @@ legend:after {
   width: 100px;
   height: 1px;
   border-bottom: 2px solid #DDDDDD;
-}
+} */
 
 /*
 Input Styling
 */
 
-label {
+/* label {
   position: relative;
   padding-bottom: 10px;
   display: inline-block;
@@ -175,7 +175,7 @@ input {
     width: 30px;
     display: inline-block;
     margin-right: 5px;
-}
+} */
 
 /*
 Basic Info Styling
@@ -185,7 +185,7 @@ Basic Info Styling
 Stat Styling
 */
 
-#stats .table-header td{
+/* #stats .table-header td{
   font-size: 11px;
   position: relative;
   display: inline-block;
@@ -208,7 +208,7 @@ Stat Styling
 
 #stats input {
   margin-bottom: 20px;
-}
+} */
 
 /* from https://codepen.io/terminalGradience/pen/ENQRpp /*
 

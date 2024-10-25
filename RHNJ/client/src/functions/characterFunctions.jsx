@@ -1,31 +1,6 @@
 /* level up and change stats, gain new skills,  choose basic states /*
 /* skill modifiers */
 /* roll for stats, dice roller if we're even doing this */
-/* if a ability is X modifyer = Y. Max ability is 30.
-1 = -5
-2-3 = -4
-4-5 = -3
-6-7 = -2
-8-9 = -1
-10-11 = 0
-12-13 = 1
-14-15 = 2
-16-17 = 3
-18-19 = 4
-20-21 = 5
-22-23 = 6
-24-25 = 7
-26-27 = 8
-28-29 = 9
-30 = 10
-*/
-/* levels:
-1 = exp 0 bonus is +2 to stats
-2 = exp 300 bonus is +2 to stats
-3 = exp 900 bonus is +2 to stats
-4 = exp 2700 bonus is +2 to stats
-5 = exp 6500 bonus is +2 to stats
-6 = exp 14000 bonus is +2 to stats */
 
 /* for each level up, you gail an additional attack die */
 
@@ -91,7 +66,7 @@ $(function() {
 
 
   /* https://codepen.io/terminalGradience/pen/ENQRpp */
-  var data = {
+ /*  var data = {
     stats:{
       str:{ base:10, temp:0, mod:0 },
       dex:{ base:10, temp:0, mod:0 },
@@ -707,4 +682,4 @@ $(function() {
     }
     
     return rolls;
-  }
+  } */
