@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/login';
-import Signup from './components/signUp';
-import AboutCharacters from './pages/AboutCharacters';
-import AdminHome from './pages/adminHome';
-import DMHome from './pages/dmHome';
-import PlayerHome from './pages/playerHome';
-import Navigations from './components/navigations';
+import Login from "./components/login";
+import Signup from "./components/signUp";
+import AboutCharacters from "./pages/AboutCharacters";
+import AdminHome from "./pages/administratorHome";
+import DMHome from "./pages/dmHome";
+import PlayerHome from "./pages/playerHome";
+import Navigations from "./components/navigations";
 
 
 function App() {   /*why would you have const instead of function?*/

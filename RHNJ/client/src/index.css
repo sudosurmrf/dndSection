@@ -1,4 +1,4 @@
-layer library, reset, base, demo;
+/*layer library, reset, base, demo; */
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
 
@@ -287,7 +287,7 @@ layer library, reset, base, demo;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    /* text-fill-color: transparent; */
   }
 }
 

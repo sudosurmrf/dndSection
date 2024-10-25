@@ -3,7 +3,7 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-import CharacterForm from '../components/CharacterForm'; // Component for creating/editing characters
+/* import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
 
 const PlayerHome = () => {
   const [characters, setCharacters] = useState([]);
