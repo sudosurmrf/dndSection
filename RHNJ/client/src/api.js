@@ -18,3 +18,7 @@ export const createCharacter = (token, characterData) =>
   });
 
 // Add more API functions as needed
+export const fetchUsers = (token) =>
+  api.get('/users', { headers: { Authorization: `Bearer ${token}` } });
+
+

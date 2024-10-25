@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { searchAllPlayers, deletePlayer } from '../functions/dmFunctions'; // Adjust imports based on your file structure
+import { searchAllPlayers, invitePlayerToTeam, removePlayerFromTeam } from '../functions/dmFunctions'; // Adjust imports based on your file structure
+
 
 const DMHome = () => {
   const [players, setPlayers] = useState([]);
@@ -23,7 +24,7 @@ const DMHome = () => {
 
   const handleDelete = async (playerId) => {
     try {
-      await deletePlayer(playerId);
+      await removePlayerFromTeam(playerId);
       setPlayers((prevPlayers) =>
         prevPlayers.filter((player) => player.id !== playerId)
       );

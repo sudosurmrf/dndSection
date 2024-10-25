@@ -64,6 +64,16 @@ export const createTeam = async (teamData) => {
     throw error;
   }
 };
+// Search all players
+export const searchAllPlayers = async () => {
+  try {
+    return await fetchData(`${API_URL}/players`);
+  } catch (error) {
+    console.error('Error fetching players:', error);
+    throw error;
+  }
+};
+
 
 // Invite player to team
 export const invitePlayerToTeam = async (teamId, playerId) => {

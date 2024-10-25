@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // pulled Switch out of import************
 import Login from "./components/login";
 import Signup from "./components/signUp";
 import AboutCharacters from "./pages/AboutCharacters";
@@ -9,17 +9,17 @@ import PlayerHome from "./pages/playerHome";
 import Navigations from "./components/navigations";
 
 
-function App() {   /*why would you have const instead of function?*/
+function App() {   
   return (
 <Router>
-      <Switch>
+      <Routes>
         <Route path='/signup' component={Signup} />
         <Route path='/login' component={Login} />
         <Route path='/about-characters' component={AboutCharacters} />
         <Route path='/admin-home' component={AdminHome} />
         <Route path='/dm-home' component={DMHome} />
         <Route path='/player-home' component={PlayerHome} />
-      </Switch>
+      </Routes>
     </Router>
   );
 };
