@@ -133,3 +133,25 @@ export const increaseCharacterXP = async (characterId, amount) => {
     throw error;
   }
 };
+
+// Fetch all players
+export const searchAllPlayers = async () => {
+  try {
+    return await fetchData(`${API_URL}/players`); // Adjust endpoint as necessary
+  } catch (error) {
+    console.error('Error fetching all players:', error);
+    throw error;
+  }
+};
+
+// Delete a player
+export const deletePlayer = async (playerId) => {
+  try {
+    return await fetchData(`${API_URL}/players/${playerId}`, {
+      method: 'DELETE',
+    });
+  } catch (error) {
+    console.error('Error deleting player:', error);
+    throw error;
+  }
+};

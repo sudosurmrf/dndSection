@@ -6,6 +6,8 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const [error, setError] = useState('');
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -15,6 +17,7 @@ const Login = () => {
       // Redirect to home or another page
     } catch (error) {
       console.error('Login failed:', error.response.data);
+      setError('Login failed. Please check your credentials.');
     }
   };
 

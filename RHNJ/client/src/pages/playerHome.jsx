@@ -3,13 +3,13 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-import CharacterForm from '../components/CharacterForm'; // Component for creating/editing characters
+// import CharacterForm from './components/CharacterForm'; // Component for creating/editing characters
 
 const PlayerHome = () => {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false); // To toggle the character form
+  // const [showForm, setShowForm] = useState(false); // To toggle the character form
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -37,9 +37,9 @@ const PlayerHome = () => {
     }
   };
 
-  const toggleForm = () => {
-    setShowForm((prev) => !prev);
-  };
+  // const toggleForm = () => {
+  //   setShowForm((prev) => !prev);
+  // };
 
   if (loading) {
     return <p>Loading characters...</p>;
@@ -49,7 +49,7 @@ const PlayerHome = () => {
     <div>
       <h2>Player Home</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={toggleForm}>
+      {/* <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
       </button>
       {showForm && (
@@ -58,7 +58,7 @@ const PlayerHome = () => {
           refreshCharacters={fetchCharacters}
         />
       )}{' '}
-      {/* Assuming CharacterForm handles character creation */}
+      Assuming CharacterForm handles character creation */}
       <h3>Your Characters</h3>
       <table>
         <thead>

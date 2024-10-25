@@ -1,9 +1,8 @@
-layer library, reset, base, demo;
+/* layer library, reset, base, demo; */
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
 
 @layer reset {
-
   *,
   ::before,
   ::after {
@@ -18,9 +17,7 @@ layer library, reset, base, demo;
 @layer base {
   html {
     --nav-block-size: 74px;
-    --brand-gradient: linear-gradient(227deg,
-        #1400c7 0%,
-        #00bbff 100%);
+    --brand-gradient: linear-gradient(227deg, #1400c7 0%, #00bbff 100%);
 
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
@@ -102,7 +99,7 @@ layer library, reset, base, demo;
     block-size: 100%;
     display: grid;
 
-    >* {
+    > * {
       grid-area: 1/1;
     }
   }
@@ -220,7 +217,7 @@ layer library, reset, base, demo;
     place-items: center;
     overflow: clip;
 
-    >* {
+    > * {
       grid-area: 1/1;
     }
   }
@@ -259,27 +256,19 @@ layer library, reset, base, demo;
   }
 
   .content-1 {
-    --_text-gradient: linear-gradient(227deg,
-        #1400c7 0%,
-        #00bbff 100%);
+    --_text-gradient: linear-gradient(227deg, #1400c7 0%, #00bbff 100%);
   }
 
   .content-2 {
-    --_text-gradient: linear-gradient(227deg,
-        #28dc28 0%,
-        #00bbff 100%);
+    --_text-gradient: linear-gradient(227deg, #28dc28 0%, #00bbff 100%);
   }
 
   .content-3 {
-    --_text-gradient: linear-gradient(227deg,
-        #1400c7 0%,
-        #b800b1 100%);
+    --_text-gradient: linear-gradient(227deg, #1400c7 0%, #b800b1 100%);
   }
 
   .content-4 {
-    --_text-gradient: linear-gradient(227deg,
-        #b800b1 0%,
-        #f50000 100%);
+    --_text-gradient: linear-gradient(227deg, #b800b1 0%, #f50000 100%);
   }
 
   .text-highlight {
