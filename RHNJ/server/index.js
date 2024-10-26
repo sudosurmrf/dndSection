@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors'); // Import cors
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -55,6 +55,7 @@ function authMiddleware(req, res, next) {
 // Create Express server
 function createServer() {
   const app = express();
+  app.use(cors()); // Added this line
   app.use(express.json());
 
   app.get('/test', (req, res) => {
@@ -81,6 +82,7 @@ function createServer() {
       });
       res.status(201).json({ id: user.id, username: user.username });
     } catch (error) {
+      console.error('Error during signup:', error);
       next(error);
     }
   });

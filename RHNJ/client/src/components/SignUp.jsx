@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../api';
 
+
+
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,18 +17,19 @@ const Signup = () => {
       console.log('Signup successful:', response.data);
       navigate('/player-home');   // Redirect to login or another page
     } catch (error) {
-      console.error('Signup failed:', error.response.data);
+      console.error('Signup failed:', error.response?.data || error.message);
+      alert('Signup failed: ' + (error.response?.data?.error || 'An error occurred'));
     }
   };
 
   return (
-    <div className="login-page">
+    <div className="signup-page">
       <div className="form">
-    <form className="login-form" onSubmit={handleSignup}>
+    <form className="signup-form" onSubmit={handleSignup}>
           <div className="user-box">
       <input
-        type='text'
-        placeholder='Username'
+        type="text"
+        placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
@@ -34,14 +37,14 @@ const Signup = () => {
           </div>
       <div className="user-box">
       <input
-        type='password'
-        placeholder='Password'
+        type="password"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
       />
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type="submit">Sign Up</button>
       </form>
     </div>
     </div>
