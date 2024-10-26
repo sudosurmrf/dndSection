@@ -9,8 +9,12 @@ import PlayerHome from "./pages/playerHome";
 import Navigations from "./components/Navigations";
 import Home from "./components/Home";
 
+
+
 function App() {   
   return (
+    
+
     <div>
     <Routes>
         <Route path='/signup' element={<Signup/>} />
@@ -21,7 +25,7 @@ function App() {
         <Route path='/player-home' element={<PlayerHome/>} />
         <Route path='/navigations' element={<Navigations/>} />
         <Route path='/' element={<Home/>} />
-      </Routes>
+    </Routes>
     </div>   
   );
 };

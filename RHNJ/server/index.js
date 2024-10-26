@@ -1,9 +1,9 @@
 const express = require('express');
+
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-
 const prisma = new PrismaClient();
 
 const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';

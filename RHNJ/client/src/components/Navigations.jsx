@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navigations = () => {
   return (
-{/* <nav>
+<nav>
       <ul>
         <li>
           <Link to='/login'>Login</Link>
@@ -25,7 +25,7 @@ const Navigations = () => {
           <Link to='/player-home'>Player Home</Link>
         </li>
       </ul>
-    </nav> */}
+    </nav>
   );
 };
 
