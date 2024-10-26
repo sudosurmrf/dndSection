@@ -85,7 +85,7 @@
     transition: opacity ease 100ms;
   } */
   
-  /* .button {
+  /*  .button {
     
       width: 100px;
     height: 30px;
@@ -98,8 +98,8 @@
     opacity: 0.8;
     z-index: 2;
     transition: all ease 100ms;
-    /*border-right: 1px solid #7D7D7D;*/
-  } */
+    /*border-right: 1px solid #7D7D7D;
+  }  */
   
   /* .button.selected {
     top: -40px;

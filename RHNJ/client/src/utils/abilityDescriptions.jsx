@@ -257,4 +257,4 @@ const abilities = [
     
   ];
 
-export abilities;
+export default abilities;

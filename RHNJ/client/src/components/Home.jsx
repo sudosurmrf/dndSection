@@ -1,10 +1,11 @@
-// client/src/components/navigations.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* the components need to be named with capitol letters to be recognized as components.  */
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
-const Navigations = () => {
+function Home() {
   return (
-<nav>
+    <div>
+      <nav>
       <ul>
         <li>
           <Link to='/login'>Login</Link>
@@ -26,7 +27,8 @@ const Navigations = () => {
         </li>
       </ul>
     </nav>
+    </div>
   );
-};
+}
 
-export default Navigations;
+export default Home;
