@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+/* search all team characters, search single team character, edit user character */
+/* createte, invite player to team, remove player from team, delete team */
+/* increase XP for team and single character */
+>>>>>>> main
 const API_URL = 'http://localhost:3000/api'; // Update with your API URL
 
 // Helper function for making fetch requests
@@ -61,6 +67,19 @@ export const createTeam = async (teamData) => {
     throw error;
   }
 };
+<<<<<<< HEAD
+=======
+// Search all players
+export const searchAllPlayers = async () => {
+  try {
+    return await fetchData(`${API_URL}/players`);
+  } catch (error) {
+    console.error('Error fetching players:', error);
+    throw error;
+  }
+};
+
+>>>>>>> main
 
 // Invite player to team
 export const invitePlayerToTeam = async (teamId, playerId) => {
@@ -132,6 +151,7 @@ export const increaseCharacterXP = async (characterId, amount) => {
     console.error('Error increasing character XP:', error);
     throw error;
   }
+<<<<<<< HEAD
 };
 
 // Fetch all players
@@ -155,3 +175,6 @@ export const deletePlayer = async (playerId) => {
     throw error;
   }
 };
+=======
+};
+>>>>>>> main

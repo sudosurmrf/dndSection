@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   background-image: url(./Images/Home-background.gif);
   background-size: cover;
@@ -54,6 +55,9 @@ li {
 }
 
 /* layer library, reset, base, demo;
+=======
+/*layer library, reset, base, demo; */
+>>>>>>> main
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
 
@@ -343,7 +347,11 @@ li {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     /* text-fill-color: transparent; */
+<<<<<<< HEAD
 /* }
+=======
+  }
+>>>>>>> main
 }
 
 @supports (animation-timeline: scroll()) {

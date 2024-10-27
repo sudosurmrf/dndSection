@@ -1,5 +1,6 @@
 // client/src/pages/aboutCharacters.jsx
 import React from 'react';
+import characters from '../utils/characterList';
 
 const AboutCharacters = () => {
   return (

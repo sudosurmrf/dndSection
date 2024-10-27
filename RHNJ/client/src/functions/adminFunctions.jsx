@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 // client/src/functions/adminFunctions.jsx
 import { fetchUsers, deleteUser } from '../api';
+=======
+/* search all users, search single user, search all dms, search single dm */
+/* edit user, delete user, edit dm, delete dm */
+/* search all characters, search single character, edit character, delete character */
+// client/src/functions/adminFunctions.jsx
+import { fetchUsers } from '../api';
+>>>>>>> main
 
 export const searchSingleUser = async (userId) => {
   try {
@@ -114,4 +122,8 @@ export const deleteCharacter = async (characterId) => {
     console.error('Error deleting character:', error);
     throw error;
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> main
