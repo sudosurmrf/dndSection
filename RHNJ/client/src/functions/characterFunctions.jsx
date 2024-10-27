@@ -1,150 +1,65 @@
-<<<<<<< HEAD
-const API_URL = 'http://localhost:3000/api'; // Update with your API URL
-
-// Helper function for making fetch requests
-const fetchData = async (url, options) => {
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Error fetching data');
-  }
-  return response.json();
-};
-
-// Level Up Character
-export const levelUpCharacter = async (characterId) => {
-  try {
-    return await fetchData(`${API_URL}/characters/${characterId}/level-up`, {
-      method: 'POST',
-    });
-  } catch (error) {
-    console.error('Error leveling up character:', error);
-    throw error;
-  }
-};
-
-// Change Character Stats
-export const changeCharacterStats = async (characterId, newStats) => {
-  try {
-    return await fetchData(`${API_URL}/characters/${characterId}/stats`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newStats),
-    });
-  } catch (error) {
-    console.error('Error changing character stats:', error);
-    throw error;
-  }
-};
-
-// Gain New Skills
-export const gainNewSkills = async (characterId, newSkills) => {
-  try {
-    return await fetchData(`${API_URL}/characters/${characterId}/skills`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ skills: newSkills }),
-    });
-  } catch (error) {
-    console.error('Error gaining new skills:', error);
-    throw error;
-  }
-};
-
-// Roll for Stats
-export const rollStats = (numDice = 4, dropLowest = 1) => {
-  const rolls = Array.from(
-    { length: numDice },
-    () => Math.floor(Math.random() * 6) + 1
-  );
-  const sortedRolls = rolls.sort((a, b) => a - b);
-  const finalRoll = sortedRolls
-    .slice(dropLowest)
-    .reduce((sum, roll) => sum + roll, 0);
-  return finalRoll;
-};
-
-// Example of a Dice Roller
-export const rollDice = (numSides = 6, numDice = 1) => {
-  return Array.from(
-    { length: numDice },
-    () => Math.floor(Math.random() * numSides) + 1
-  );
-};
-=======
 /* level up and change stats, gain new skills,  choose basic states /*
 /* skill modifiers */
 /* roll for stats, dice roller if we're even doing this */
 
 /* for each level up, you gail an additional attack die */
 
-
 /*from https://codepen.io/pineapplechunk/pen/AoegBq */
-$(function() {
-    console.log('Document Ready!');
-    
-    var $buttons = $('.button'),
-        $bt1 = $('#bt1'),
-        $bt2 = $('#bt2'),
-        $bt3 = $('#bt3'),
-        $stats = $('#stats > table > tbody > tr > td:first-child > input');
-   
-    
-    
-    
-    $buttons.click(function() {
-      console.log('Clicked button');
-      $buttons.removeClass('selected');
-      $(this).addClass('selected active');
-      var $selected = $(this).attr('id');
-      
-      switch($selected)
-      {
-        case 'bt1':
-          $('.tab').removeClass('active');
-          $('#tab1').addClass('active');
-          break;
-          
-        case 'bt2':
-          $('.tab').removeClass('active');
-          $('#tab2').addClass('active');
-          break;
-          
-        case 'bt3':
-          $('.tab').removeClass('active');
-          $('#tab3').addClass('active');
-          break;
-          
-        default:
-          console.log('Error: executed default case');
-      }        
-    });
-    
-    /*
-    Mod Calculator
-    */
-    $stats.keyup(function() {
-      console.log('Keyup');
-      var $val = this.value;
-      if ($val > 0) {
-        console.log('if statement executed');
-        var $mod = Math.floor(($val - 10) / 2);
-        console.log($mod);
-        $(this).parent().next().children('input').attr('value', $mod);
-      } else if ($val == '') {
-        $(this).parent().next().children('input').attr('value', '0');
-      }
-    });
+$(function () {
+  console.log('Document Ready!');
+
+  var $buttons = $('.button'),
+    $bt1 = $('#bt1'),
+    $bt2 = $('#bt2'),
+    $bt3 = $('#bt3'),
+    $stats = $('#stats > table > tbody > tr > td:first-child > input');
+
+  $buttons.click(function () {
+    console.log('Clicked button');
+    $buttons.removeClass('selected');
+    $(this).addClass('selected active');
+    var $selected = $(this).attr('id');
+
+    switch ($selected) {
+      case 'bt1':
+        $('.tab').removeClass('active');
+        $('#tab1').addClass('active');
+        break;
+
+      case 'bt2':
+        $('.tab').removeClass('active');
+        $('#tab2').addClass('active');
+        break;
+
+      case 'bt3':
+        $('.tab').removeClass('active');
+        $('#tab3').addClass('active');
+        break;
+
+      default:
+        console.log('Error: executed default case');
+    }
   });
 
+  /*
+    Mod Calculator
+    */
+  $stats.keyup(function () {
+    console.log('Keyup');
+    var $val = this.value;
+    if ($val > 0) {
+      console.log('if statement executed');
+      var $mod = Math.floor(($val - 10) / 2);
+      console.log($mod);
+      $(this).parent().next().children('input').attr('value', $mod);
+    } else if ($val == '') {
+      $(this).parent().next().children('input').attr('value', '0');
+    }
+  });
+});
 
-
-  /* https://codepen.io/terminalGradience/pen/ENQRpp */
- /*  var data = {
+/* https://codepen.io/terminalGradience/pen/ENQRpp */
+/*  var data = {
     stats:{
       str:{ base:10, temp:0, mod:0 },
       dex:{ base:10, temp:0, mod:0 },
@@ -761,4 +676,3 @@ $(function() {
     
     return rolls;
   } */
->>>>>>> main

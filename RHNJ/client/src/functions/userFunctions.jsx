@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 /*search all and serch single player*/
 /* search all user characters, search single user character, edit user character, delete user character */
->>>>>>> main
 const API_URL = 'http://localhost:3000/api'; // Update with your API URL
 
 // Helper function for making fetch requests
@@ -81,8 +78,4 @@ export const deleteUserCharacter = async (characterId) => {
     console.error('Error deleting character:', error);
     throw error;
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> main
