@@ -7,16 +7,23 @@ function Home() {
     <div>
       <nav>
       <ul>
+      <li>
+          <Link to='/about'>About</Link>
+        </li>
+        <li>
+          <Link to='/how-to-play'>How to Play</Link>
+        </li>
+        <li>
+          <Link to='/about-characters'>Characters</Link>
+        </li>
         <li>
           <Link to='/login'>Login</Link>
         </li>
         <li>
           <Link to='/signup'>Signup</Link>
         </li>
-        <li>
-          <Link to='/about-characters'>About Characters</Link>
-        </li>
-        <li>
+        
+        {/* <li>
           <Link to='/admin-home'>Admin Home</Link>
         </li>
         <li>
@@ -24,7 +31,7 @@ function Home() {
         </li>
         <li>
           <Link to='/player-home'>Player Home</Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
     </div>
