@@ -39,6 +39,20 @@ const DMHome = () => {
 
   return (
     <div>
+      <nav>
+      <ul>
+      <li>
+          <Link to='/how-to-play'>How to Play</Link>
+        </li>
+        <li>
+          <Link to='/about-characters'>Characters</Link>
+        </li>
+        <li>
+          <Link to='/player-home'>Player Home</Link>
+        </li>
+        <button onClick={handleLogout}>Logout</button>
+      </ul>
+    </nav>
       <h2>Dungeon Master Home</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <h3>Player List</h3>
