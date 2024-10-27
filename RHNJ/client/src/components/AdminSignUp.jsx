@@ -1,7 +1,7 @@
 import React from 'react';
-import AdminSignup from './components/adminSignup';
 
-const App = () => {
+
+const AdminSignUp = () => {
   return (
     <div>
       <AdminSignup />
@@ -9,4 +9,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AdminSignUp;

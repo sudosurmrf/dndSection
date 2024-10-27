@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'; // If you're using React Router
-import { dmSignUp } from '../functions/userFunctions'; // Adjust import based on your file structure
+import {useNavigate} from 'react-router-dom'; // If you're using React Router
+/* import { dmSignUp } from '../functions/userFunctions'; // Adjust import based on your file structure */
 
-const DmSignUp = () => {
+export default function DmSignUp () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const DmSignUp = () => {
 
     try {
       const newDM = { username, password, email };
-      await dmSignUp(newDM); // Make sure this function exists in your userFunctions
+      await DmSignUp(newDM); // Make sure this function exists in your userFunctions
       history.push('/dm-home'); // Redirect to DM home after successful signup
     } catch (err) {
       setError(err.message || 'Signup failed. Please try again.');
@@ -60,7 +60,5 @@ const DmSignUp = () => {
         <button type='submit'>Sign Up</button>
       </form>
     </div>
-  );
+ );
 };
-
-export default DmSignUp;
