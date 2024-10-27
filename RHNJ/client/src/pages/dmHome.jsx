@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { searchAllPlayers, invitePlayerToTeam, removePlayerFromTeam } from '../functions/dmFunctions'; // Adjust imports based on your file structure
-
+import {
+  searchAllPlayers,
+  invitePlayerToTeam,
+  removePlayerFromTeam,
+} from '../functions/dmFunctions'; // Adjust imports based on your file structure
 
 const DMHome = () => {
   const [players, setPlayers] = useState([]);

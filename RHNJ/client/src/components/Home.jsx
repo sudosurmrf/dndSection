@@ -1,29 +1,48 @@
 /* the components need to be named with capitol letters to be recognized as components.  */
-import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function Home() {
   return (
-    <div>
-      <nav>
-      <ul>
-      <li>
-          <Link to='/about'>About</Link>
-        </li>
-        <li>
-          <Link to='/how-to-play'>How to Play</Link>
-        </li>
-        <li>
-          <Link to='/about-characters'>Characters</Link>
-        </li>
-        <li>
-          <Link to='/login'>Login</Link>
-        </li>
-        <li>
-          <Link to='/signup'>Signup</Link>
-        </li>
-        
-        {/* <li>
+    <nav>
+      <div className='nav-left'>
+        <ul>
+          <li>
+            <Link to='/about' className='navtext'>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to='/how-to-play' className='navtext'>
+              How to Play
+            </Link>
+          </li>
+          <li>
+            <Link to='/about-characters' className='navtext'>
+              Characters
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className='nav-right'>
+        <ul>
+          <li>
+            <Link to='/login' className='navtext2'>
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link to='/signup' className='navtext2'>
+              Signup
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+}
+{
+  /* <li>
           <Link to='/admin-home'>Admin Home</Link>
         </li>
         <li>
@@ -31,11 +50,7 @@ function Home() {
         </li>
         <li>
           <Link to='/player-home'>Player Home</Link>
-        </li> */}
-      </ul>
-    </nav>
-    </div>
-  );
+        </li> */
 }
 
 export default Home;

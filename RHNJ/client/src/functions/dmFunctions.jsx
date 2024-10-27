@@ -74,7 +74,6 @@ export const searchAllPlayers = async () => {
   }
 };
 
-
 // Invite player to team
 export const invitePlayerToTeam = async (teamId, playerId) => {
   try {

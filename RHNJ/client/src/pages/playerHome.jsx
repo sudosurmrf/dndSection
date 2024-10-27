@@ -22,7 +22,9 @@ const PlayerHome = () => {
         const allCharacters = await searchAllUserCharacters(); // Implement this function in userFunctions
         setCharacters(allCharacters);
       } catch (err) {
-        setError('You have no characters, yet. Please create a character to start your quest!');
+        setError(
+          'You have no characters, yet. Please create a character to start your quest!'
+        );
       } finally {
         setLoading(false);
       }
@@ -53,19 +55,19 @@ const PlayerHome = () => {
   return (
     <div>
       <nav>
-      <ul>
-      <li>
-          <Link to='/how-to-play'>How to Play</Link>
-        </li>
-        <li>
-          <Link to='/about-characters'>Characters</Link>
-        </li>
-        <li>
-          <Link to='/dm-home'>DM Home</Link>
-        </li>
-        <button onClick={handleLogout}>Logout</button>
-      </ul>
-    </nav>
+        <ul>
+          <li>
+            <Link to='/how-to-play'>How to Play</Link>
+          </li>
+          <li>
+            <Link to='/about-characters'>Characters</Link>
+          </li>
+          <li>
+            <Link to='/dm-home'>DM Home</Link>
+          </li>
+          <button onClick={handleLogout}>Logout</button>
+        </ul>
+      </nav>
       <h2>Player Homepage</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={toggleForm}>
@@ -107,8 +109,3 @@ const PlayerHome = () => {
 };
 
 export default PlayerHome;
-
-
-
-
-
