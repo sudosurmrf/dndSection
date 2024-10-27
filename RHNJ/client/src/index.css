@@ -1,8 +1,64 @@
-/* layer library, reset, base, demo; */
+body {
+  background-image: url(./Images/Home-background.gif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no repeat;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: normal;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.navtext {
+  color: goldenrod;
+}
+
+.navtext2 {
+  color: goldenrod;
+  display: flex;
+  float: right;
+}
+
+.navtext,
+.navtext2 {
+  display: flex;
+}
+
+nav {
+  background: rgba(0, 0, 0, 0);
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+  justify-content: space-between;
+  margin: 0;
+  display: flex;
+}
+
+li {
+  margin: 0 20px; /* Spacing between nav items */
+}
+
+.nav-link {
+  color: goldenrod; /* Link color */
+  text-decoration: none; /* Removes underline */
+  padding: 10px; /* Padding around links */
+}
+
+/* layer library, reset, base, demo;
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
 
 @layer reset {
+
   *,
   ::before,
   ::after {
@@ -17,7 +73,9 @@
 @layer base {
   html {
     --nav-block-size: 74px;
-    --brand-gradient: linear-gradient(227deg, #1400c7 0%, #00bbff 100%);
+    --brand-gradient: linear-gradient(227deg,
+        #1400c7 0%,
+        #00bbff 100%);
 
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
@@ -99,7 +157,7 @@
     block-size: 100%;
     display: grid;
 
-    > * {
+    >* {
       grid-area: 1/1;
     }
   }
@@ -217,7 +275,7 @@
     place-items: center;
     overflow: clip;
 
-    > * {
+    >* {
       grid-area: 1/1;
     }
   }
@@ -256,19 +314,27 @@
   }
 
   .content-1 {
-    --_text-gradient: linear-gradient(227deg, #1400c7 0%, #00bbff 100%);
+    --_text-gradient: linear-gradient(227deg,
+        #1400c7 0%,
+        #00bbff 100%);
   }
 
   .content-2 {
-    --_text-gradient: linear-gradient(227deg, #28dc28 0%, #00bbff 100%);
+    --_text-gradient: linear-gradient(227deg,
+        #28dc28 0%,
+        #00bbff 100%);
   }
 
   .content-3 {
-    --_text-gradient: linear-gradient(227deg, #1400c7 0%, #b800b1 100%);
+    --_text-gradient: linear-gradient(227deg,
+        #1400c7 0%,
+        #b800b1 100%);
   }
 
   .content-4 {
-    --_text-gradient: linear-gradient(227deg, #b800b1 0%, #f50000 100%);
+    --_text-gradient: linear-gradient(227deg,
+        #b800b1 0%,
+        #f50000 100%);
   }
 
   .text-highlight {
@@ -276,8 +342,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
-  }
+    /* text-fill-color: transparent; */
+/* }
 }
 
 @supports (animation-timeline: scroll()) {
@@ -288,8 +354,8 @@
   .section {
     view-timeline-name: --section;
   }
-
-  .content-1 {
+ */
+/* .content-1 {
     view-timeline-name: --content-1;
   }
 
@@ -354,9 +420,9 @@
     60% {
       filter: hue-rotate(4deg);
     }
-  }
+  } */
 
-  @keyframes slide-up-first-card {
+/* @keyframes slide-up-first-card {
     50% {
       translate: 0;
       opacity: 1;
@@ -391,4 +457,4 @@
       opacity: 0;
     }
   }
-}
+} */
