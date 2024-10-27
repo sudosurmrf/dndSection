@@ -3,6 +3,7 @@ import React from "react";
 
 export default function playerCharacter({ }) {
     return (
+      <div>
       <div class='wrapper'>
   <div id="tab1" class="tab active">
     <div id="bt1" class="button selected"></div>
