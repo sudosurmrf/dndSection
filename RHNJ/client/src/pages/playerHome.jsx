@@ -13,7 +13,7 @@ const PlayerHome = () => {
   const [showForm, setShowForm] = useState(false); // To toggle the character form
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token from storage
-    navigate('/'); // Redirect to the home or login page
+    navigate('/home'); // Redirect to the home or login page
   };
 
   useEffect(() => {
