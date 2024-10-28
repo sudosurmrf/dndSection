@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const AdminSignUp = () => {
   return (
     <div>
