@@ -4,7 +4,7 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-import CharacterForm from '../components/CharacterForm'; // Adjust imports as needed
+import CharacterForm from '/src/utils/characterBuilder'; // Adjust imports as needed
 
 
 const PlayerHome = () => {
