@@ -1,56 +1,70 @@
 import React from "react"; 
+import characters from "./characterList";
 
-export default function characterBuilder({class, description, catchPhrases, image, strength, dexterity, constitution, intelligence, wisdom, charisma, savingThrows, skills, singleUseSkill, hitPoints, attackRoll}) {
-if (!class) {
-    return <div>No character selected</div>;
-  }
-  
+const CharacterSelect = ({ characters }) => {
+  const [selectedCharacterId, setSelectedCharacterId] = useState('');
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-    return (
-      <div>
-<h1>Build Your Character</h1>
-        <h2>{class}</h2>
-        <img src={image} alt={class} />
-        <p>{description}</p>
-        <h3>Stats</h3>
-        <ul>
-          <li>Strength: {strength}</li>
-          <li>Dexterity: {dexterity}</li>
-          <li>Constitution: {constitution}</li>
-          <li>Intelligence: {intelligence}</li>
-          <li>Wisdom: {wisdom}</li>
-          <li>Charisma: {charisma}</li>
-        </ul>
-        <h3>Saving Throws</h3>
-        <ul>
-          {savingThrows.map((save) => (
-            <li key={save}>{save}</li>
-          ))}
-        </ul>
-        <h3>Skills</h3>
-        <ul>
-          {skills.map((skill) => (
-            <li key={skill}>{skill}</li>
-          ))}
-        </ul>
-        <h3>Single-Use Skills</h3>
-        <ul>
-          {singleUseSkill.map((skill) => (
-            <li key={skill}>{skill}</li>
-          ))}
-        </ul>
-        <h3>Hit Points</h3>
-        <p>{hitPoints}</p>
-        <h3>Attack Roll</h3>
-        <p>{attackRoll}</p>
-        <h3>Catch Phrases</h3>
-        <ul>
-          {catchPhrases.map((phrase) => (
-            <li key={phrase}>{phrase}</li>
-          ))}
-        </ul>
+  // Handle character selection from the dropdown
+  const handleCharacterChange = (event) => {
+    const characterId = event.target.value;
+    setSelectedCharacterId(characterId);
+
+    // Find the selected character based on ID
+    const character = characters.find((char) => char.id === characterId);
+    setSelectedCharacter(character);
+  };
+
+  return (
+    <div>
+      <h2>Select a Character</h2>
+
+      {/* Character Dropdown */}
+      <label htmlFor="character-select">Choose a Character:</label>
+      <select
+        id="character-select"
+        value={selectedCharacterId}
+        onChange={handleCharacterChange}
+      >
+        <option value="">-- Select a Character --</option>
+        {characters.map((character) => (
+          <option key={character.id} value={character.id}>
+            {character.name}
+          </option>
+        ))}
+      </select>
+
+      {/* Display Selected Character's Stats */}
+      {selectedCharacter && (
+        <div className="character-stats">
+          <h3>{selectedCharacter.name}'s Stats</h3>
+          <p>Description: {selectedCharacter.description}</p>
+          <ul>
+            <li>Level: {selectedCharacter.level}</li>
+            <li>Strength: {selectedCharacter.stats.strength}</li>
+            <li>Dexterity: {selectedCharacter.stats.dexterity}</li>
+            <li>Constitution: {selectedCharacter.stats.constitution}</li>
+            <li>Intelligence: {selectedCharacter.stats.intelligence}</li>
+            <li>Wisdom: {selectedCharacter.stats.wisdom}</li>
+            <li>Charisma: {selectedCharacter.stats.charisma}</li>
+          </ul>
+          <p>Saving Throws:{selectedCharacter.savingThrows.map((save) => (
+              <span key={save}>{save}, </span>))} </p>
+          <p>Skills: {selectedCharacter.skills.map((skill) => (
+              <span key={skill}>{skill}, </span>))} </p>
+          <p>Single-Use Skills: {selectedCharacter.singleUseSkill.map((skill) => (
+              <span key={skill}>{skill}, </span>))} </p>
+          <p>Hit Points: {selectedCharacter.hitPoints}</p>
+          <p>Attack Roll: {selectedCharacter.attackRoll}</p>
+          <p>Catch Phrases: {selectedCharacter.catchPhrases.map((phrase) => (
+              <span key={phrase}>{phrase}, </span>))} </p>
+
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CharacterSelect;
 
 
-</div>
-    );
-  }

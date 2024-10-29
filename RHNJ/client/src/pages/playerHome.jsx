@@ -4,8 +4,7 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-import DataDisplay from '../functions/character/characterDataDisply'; 
-import CharacterForm from '../functions/character/CharacterForm';
+import CharacterForm from '../components/CharacterForm'; // Adjust imports as needed
 
 
 const PlayerHome = () => {
@@ -13,7 +12,6 @@ const PlayerHome = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); 
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const navigate = useNavigate();
   
   const handleLogout = () => {
@@ -76,6 +74,7 @@ const PlayerHome = () => {
       {showForm && (
         <CharacterForm onClose={toggleForm} refreshCharacters={fetchCharacters} />
       )}
+      <CharacterSelect characters={characters} />
       <h3>Your Characters</h3>
       <table>
         <thead>
