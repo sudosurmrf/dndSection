@@ -1,8 +1,16 @@
 // client/src/components/navigations.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../api';
 
 const Navigations = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // Call the logout function
+    navigate('/login'); // Redirect to the login page
+  };
+
   return (
     <nav>
       <div className='nav-left1'>
@@ -40,6 +48,11 @@ const Navigations = () => {
             <Link to='/signup' className='navtext2'>
               Signup
             </Link>
+          </li>
+          <li>
+            <button onClick={handleLogout} className='navtext2'>
+              Logout
+            </button>
           </li>
         </ul>
       </div>

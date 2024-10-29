@@ -80,7 +80,11 @@ li {
 }
 
 .nav-left1 {
-  margin-left: 250px;
+  margin-left: 150px;
+  color: goldenrod;
+  text-decoration: none;
+  display: flex;
+  float: left;
 }
 
 .htp-head-text {
@@ -165,7 +169,8 @@ th {
 
 /* Login Page and Signup Page */
 .login-page,
-.signup-page {
+.signup-page,
+.player-home {
   background-image: url(./Images/background-image2.gif);
   position: absolute;
   top: 0;
@@ -246,6 +251,8 @@ button {
   background-color: dimgray; /* Button color */
   cursor: pointer; /* Pointer on hover */
 }
+
+/* Player Home */
 
 /* layer library, reset, base, demo;
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);

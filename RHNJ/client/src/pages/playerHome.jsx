@@ -4,14 +4,17 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-/* import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
+// import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
 
 const PlayerHome = () => {
+  const navigate = useNavigate();
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); // To toggle the character form
+
   const handleLogout = () => {
+    console.log('Logging out...');
     localStorage.removeItem('token'); // Remove token from storage
     navigate('/home'); // Redirect to the home or login page
   };
@@ -53,17 +56,23 @@ const PlayerHome = () => {
   }
 
   return (
-    <div>
+    <div className='player-home'>
       <nav>
         <ul>
           <li>
-            <Link to='/how-to-play'>How to Play</Link>
+            <Link to='/how-to-play' className='nav-left1'>
+              How to Play
+            </Link>
           </li>
           <li>
-            <Link to='/about-characters'>Characters</Link>
+            <Link to='/about-characters' className='nav-left1'>
+              Characters
+            </Link>
           </li>
           <li>
-            <Link to='/dm-home'>DM Home</Link>
+            <Link to='/dm-home' className='nav-left1'>
+              DM Home
+            </Link>
           </li>
           <button onClick={handleLogout}>Logout</button>
         </ul>
