@@ -4,34 +4,38 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-/* import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
+import DataDisplay from '../functions/character/characterDataDisply'; 
+import CharacterForm from '../functions/character/CharacterForm';
+
 
 const PlayerHome = () => {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false); // To toggle the character form
+  const [showForm, setShowForm] = useState(false); 
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const navigate = useNavigate();
+  
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token from storage
-    navigate('/home'); // Redirect to the home or login page
+    navigate('/login'); // Redirect to the home or login page
+  };
+
+  const fetchCharacters = async () => {
+    try {
+      const allCharacters = await searchAllUserCharacters();
+      setCharacters(allCharacters);
+    } catch (err) {
+      setError('No characters found. Create a character to start!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const allCharacters = await searchAllUserCharacters(); // Implement this function in userFunctions
-        setCharacters(allCharacters);
-      } catch (err) {
-        setError(
-          'You have no characters, yet. Please create a character to start your quest!'
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCharacters();
   }, []);
+
 
   const handleDelete = async (characterId) => {
     try {
@@ -44,10 +48,12 @@ const PlayerHome = () => {
     }
   };
 
+
   const toggleForm = () => {
     setShowForm((prev) => !prev);
   };
 
+  
   if (loading) {
     return <p>Loading characters...</p>;
   }
@@ -56,15 +62,9 @@ const PlayerHome = () => {
     <div>
       <nav>
         <ul>
-          <li>
-            <Link to='/how-to-play'>How to Play</Link>
-          </li>
-          <li>
-            <Link to='/about-characters'>Characters</Link>
-          </li>
-          <li>
-            <Link to='/dm-home'>DM Home</Link>
-          </li>
+          <li><Link to='/how-to-play'>How to Play</Link></li>
+          <li><Link to='/about-characters'>Characters</Link></li>
+          <li><Link to='/dm-home'>DM Home</Link></li>
           <button onClick={handleLogout}>Logout</button>
         </ul>
       </nav>
@@ -74,12 +74,8 @@ const PlayerHome = () => {
         {showForm ? 'Cancel' : 'Add Character'}
       </button>
       {showForm && (
-        <CharacterForm
-          onClose={toggleForm}
-          refreshCharacters={fetchCharacters}
-        />
-      )}{' '}
-      {/* Assuming CharacterForm handles character creation */}
+        <CharacterForm onClose={toggleForm} refreshCharacters={fetchCharacters} />
+      )}
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -95,15 +91,20 @@ const PlayerHome = () => {
               <td>{character.name}</td>
               <td>{character.level}</td>
               <td>
-                <button onClick={() => handleDelete(character.id)}>
-                  Delete
-                </button>
-                {/* Add more actions like Edit if needed. text box for notes and flaws and ideals */}
+                <button onClick={() => handleDelete(character.id)}>Delete</button>
+                <button onClick={() => setSelectedCharacter(character)}>View Details</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {selectedCharacter && (
+        <div className="character-details">
+          <h3>{selectedCharacter.name}'s Details</h3>
+          <DataDisplay character={selectedCharacter} />
+          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
+        </div>
+      )}
     </div>
   );
 };
