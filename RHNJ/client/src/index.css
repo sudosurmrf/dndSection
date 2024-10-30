@@ -28,6 +28,7 @@ nav {
 .navtext,
 .navtext2 {
   display: flex;
+  text-decoration: none;
 }
 
 nav {
@@ -52,6 +53,206 @@ li {
   text-decoration: none; /* Removes underline */
   padding: 10px; /* Padding around links */
 }
+
+/* How to Play page */
+.how-to-play {
+  background-image: url(./Images/background-image2.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: stretch;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: auto; /* adds scroll bars when content exceeds the viewport */
+  /* width: 100%; */
+  color: goldenrod;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.nav-left1 {
+  margin-left: 150px;
+  color: goldenrod;
+  text-decoration: none;
+  display: flex;
+  float: left;
+}
+
+.htp-head-text {
+  color: aliceblue;
+  text-shadow: 3px 2px darkgoldenrod;
+}
+
+.htp-text {
+  color: cornsilk;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5;
+}
+
+.htp-text2 {
+  color: honeydew;
+  padding-bottom: 0;
+  margin-bottom: 5px;
+}
+
+.htp1 {
+  text-align: center;
+  align-items: center;
+}
+
+.htp-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+th {
+  padding-top: 0;
+}
+
+/* About Us page */
+.about-us {
+  background-image: url(./Images/background-image2.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: stretch;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: auto; /* adds scroll bars when content exceeds the viewport */
+  /* width: 100%; */
+  color: goldenrod;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.about-h1 {
+  color: aliceblue;
+  text-shadow: 3px 2px darkgoldenrod;
+}
+
+.about-h2 {
+  color: cornsilk;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+.about-h3 {
+  color: honeydew;
+  padding-bottom: 0;
+  margin-bottom: 5px;
+  font-family: 'balzano-std', sans-serif;
+  font-size: 30px;
+}
+
+/* Login Page and Signup Page */
+.login-page,
+.signup-page,
+.player-home {
+  background-image: url(./Images/background-image2.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: stretch;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: auto; /* adds scroll bars when content exceeds the viewport */
+  /* width: 100%; */
+  color: goldenrod;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.card-container {
+  background-image: url(./Images/tarot-card.png); /* Background image */
+  background-size: contain; /* Adjust this as needed */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: center; /* Center background */
+  width: 300px; /* Width of the card */
+  height: 400px; /* Height of the card */
+  display: flex; /* Flexbox for centering content */
+  flex-direction: column; /* Arrange inputs vertically */
+  justify-content: center; /* Center inputs vertically */
+  align-items: center; /* Center inputs horizontally */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside the card */
+  margin-top: 200px;
+}
+
+.user-box {
+  margin-bottom: 15px; /* Space between inputs */
+  width: 100%; /* Full width for inputs */
+  position: relative; /* To position inputs correctly */
+}
+
+input {
+  color: goldenrod;
+  width: 90%; /* Width of the input field */
+  padding: 10px; /* Padding inside the input */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+input-type {
+  color: #f5d04d;
+}
+
+button {
+  padding: 10px 20px; /* Padding for the button */
+  border: goldenrod; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #f5d04d; /* Button color */
+  cursor: pointer; /* Pointer on hover */
+  color: goldenrod;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px; /* Padding for the button */
+  border: goldenrod; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: dimgray; /* Button color */
+  cursor: pointer; /* Pointer on hover */
+}
+
+/* Player Home */
 
 /* layer library, reset, base, demo;
 @import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);

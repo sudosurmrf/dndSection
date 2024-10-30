@@ -7,10 +7,18 @@ const api = axios.create({
 
 // Authentication
 export const signup = async (userData) => {
-  return await api.post('/auth/signup', userData); };
-  
+  return await api.post('/auth/signup', userData);
+};
+
 export const login = async (userData) => {
-  return await api.post('/auth/login', userData); }
+  return await api.post('/auth/login', userData);
+};
+
+// Logout function
+export const logout = () => {
+  localStorage.removeItem('token'); // Clear the token from local storage
+  // Add any other cleanup actions if necessary
+};
 
 // Characters
 export const fetchCharacters = (token) =>
@@ -47,6 +55,3 @@ export const deleteCharacter = (token, characterId) =>
   api.delete(`/characters/${characterId}`, { headers: { Authorization: `Bearer ${token}` } });
 
 export default api; */
-
-
-
