@@ -1,12 +1,16 @@
 import React from 'react';
 import characters from '../utils/characterList';
+import '../index.css';
 
-export default function aboutCharacter({ setSelectedCharacterID, character }) {
+export default function AboutCharacter({ setSelectedCharacterID, character }) {
   return (
-    <tr onClick={() => setSelectedCharacterID(character.id)}>
-      <td>{character.image}</td>
-      <td>{character.class}</td>
-      <td>{character.description}</td>
-    </tr>
+    <div
+      className='about-character'
+      onClick={() => setSelectedCharacterID(character.id)}
+    >
+      <img src={character.image} alt={`${character.class} image`} />
+      <div>{character.class}</div>
+      <div>{character.description}</div>
+    </div>
   );
 }
