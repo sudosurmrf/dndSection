@@ -1,5 +1,5 @@
-import React from "react"; 
-import characters from "./characterList";
+import React, { useState } from "react";
+/* import characters from "./characterList"; */
 
 const CharacterSelect = ({ characters }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
@@ -48,17 +48,67 @@ const CharacterSelect = ({ characters }) => {
             <li>Wisdom: {selectedCharacter.stats.wisdom}</li>
             <li>Charisma: {selectedCharacter.stats.charisma}</li>
           </ul>
-          <p>Saving Throws:{selectedCharacter.savingThrows.map((save) => (
-              <span key={save}>{save}, </span>))} </p>
-          <p>Skills: {selectedCharacter.skills.map((skill) => (
-              <span key={skill}>{skill}, </span>))} </p>
-          <p>Single-Use Skills: {selectedCharacter.singleUseSkill.map((skill) => (
-              <span key={skill}>{skill}, </span>))} </p>
+          <p>
+            Saving Throws:{" "}
+            {selectedCharacter.savingThrows.map((save, index) => (
+              <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
+            ))}
+          </p>
+          <p>
+            Skills:{" "}
+            {selectedCharacter.skills.map((skill, index) => (
+              <span key={index}>{skill}{index < selectedCharacter.skills.length - 1 ? ', ' : ''}</span>
+            ))}
+          </p>
+          <p>
+            Single-Use Skills:{" "}
+            {selectedCharacter.singleUseSkill.map((skill, index) => (
+              <span key={index}>{skill}{index < selectedCharacter.singleUseSkill.length - 1 ? ', ' : ''}</span>
+            ))}
+          </p>
           <p>Hit Points: {selectedCharacter.hitPoints}</p>
           <p>Attack Roll: {selectedCharacter.attackRoll}</p>
-          <p>Catch Phrases: {selectedCharacter.catchPhrases.map((phrase) => (
-              <span key={phrase}>{phrase}, </span>))} </p>
+          <p>
+            Catch Phrases:{" "}
+            {selectedCharacter.catchPhrases.map((phrase, index) => (
+              <span key={index}>{phrase}{index < selectedCharacter.catchPhrases.length - 1 ? ', ' : ''}</span>
+            ))}
+          </p>
 
+          {/* New Text Inputs */}
+          <label htmlFor="ideals">
+            Ideals, convictions, and other things your character holds dear:
+          </label>
+          <input
+            type="text"
+            id="ideals"
+            name="ideals"
+            value={ideals}
+            onChange={(e) => setIdeals(e.target.value)}
+            placeholder="Enter your character's ideals"
+          />
+
+          <label htmlFor="flaws">
+            Flaws, skeletons in the closet, and other things that can be used against your character:
+          </label>
+          <input
+            type="text"
+            id="flaws"
+            name="flaws"
+            value={flaws}
+            onChange={(e) => setFlaws(e.target.value)}
+            placeholder="Enter your character's flaws"
+          />
+
+          <label htmlFor="notes">Notes for yourself:</label>
+          <input
+            type="text"
+            id="notes"
+            name="notes"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Enter personal notes"
+          />
         </div>
       )}
     </div>
