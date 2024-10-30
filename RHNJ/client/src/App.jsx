@@ -17,7 +17,7 @@ import './App.css';
 function App() {
   return (
     <div>
-      {<Router>
+      
       <Routes>
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path='/navigations' element={<Navigations />} />
         <Route path='/' element={<Home />} />
       </Routes>
-      </Router>}
+    
     </div>
   );
 }
