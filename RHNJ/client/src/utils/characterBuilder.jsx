@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 /* import characters from "./characterList"; */
 
-const CharacterSelect = ({ characters }) => {
+const CharacterBuilder = ({ characters }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
@@ -115,6 +115,6 @@ const CharacterSelect = ({ characters }) => {
   );
 };
 
-export default CharacterSelect;
+export default CharacterBuilder;
 
 

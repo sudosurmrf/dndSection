@@ -31,6 +31,11 @@ nav {
   text-decoration: none;
 }
 
+nav {
+  background: rgba(0, 0, 0, 0);
+  padding: 10px;
+}
+
 ul {
   list-style-type: none;
   padding: 10px;
@@ -250,6 +255,38 @@ button {
   border-radius: 5px; /* Rounded corners */
   background-color: dimgray; /* Button color */
   cursor: pointer; /* Pointer on hover */
+}
+
+/* Player Home */
+
+@layer library, reset, base, demo;
+@import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  :where(:not(dialog)) {
+    margin: 0;
+  }
+}
+
+@layer base {
+  html {
+    --nav-block-size: 74px;
+    --brand-gradient: linear-gradient(227deg,
+        #1400c7 0%,
+        #00bbff 100%);
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    min-block-size: 100dvb;
+  }
 }
 
 /* About Characters page */

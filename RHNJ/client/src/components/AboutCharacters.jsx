@@ -2,7 +2,7 @@ import React from 'react';
 import characters from '../utils/characterList';
 import '../index.css';
 
-export default function AboutCharacter({ setSelectedCharacterID, character }) {
+export default function aboutCharacter({ setSelectedCharacterID, character }) {
   return (
     <div
       className='about-character'
