@@ -34,7 +34,6 @@ const PlayerHome = () => {
     fetchCharacters();
   }, []);
 
-
   const handleDelete = async (characterId) => {
     try {
       await deleteUserCharacter(characterId);
@@ -46,12 +45,10 @@ const PlayerHome = () => {
     }
   };
 
-
   const toggleForm = () => {
     setShowForm((prev) => !prev);
   };
 
-  
   if (loading) {
     return <p>Loading characters...</p>;
   }
@@ -84,7 +81,10 @@ const PlayerHome = () => {
         {showForm ? 'Cancel' : 'Add Character'}
       </button>
       {showForm && (
-        <CharacterForm onClose={toggleForm} refreshCharacters={fetchCharacters} />
+        <CharacterForm
+          onClose={toggleForm}
+          refreshCharacters={fetchCharacters}
+        />
       )}
       <CharacterSelect characters={characters} />
       <h3>Your Characters</h3>
@@ -102,18 +102,24 @@ const PlayerHome = () => {
               <td>{character.name}</td>
               <td>{character.level}</td>
               <td>
-                <button onClick={() => handleDelete(character.id)}>Delete</button>
-                <button onClick={() => setSelectedCharacter(character)}>View Details</button>
+                <button onClick={() => handleDelete(character.id)}>
+                  Delete
+                </button>
+                <button onClick={() => setSelectedCharacter(character)}>
+                  View Details
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       {selectedCharacter && (
-        <div className="character-details">
+        <div className='character-details'>
           <h3>{selectedCharacter.name}'s Details</h3>
           <DataDisplay character={selectedCharacter} />
-          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
+          <button onClick={() => setSelectedCharacter(null)}>
+            Close Details
+          </button>
         </div>
       )}
     </div>

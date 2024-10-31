@@ -17,6 +17,7 @@ export const login = async (userData) => {
 // Logout function
 export const logout = () => {
   localStorage.removeItem('token'); // Clear the token from local storage
+  console.log('User logged out');
   // Add any other cleanup actions if necessary
 };
 
