@@ -23,6 +23,12 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       onCharacterSelect(character);
     }
   };
+    const saveCharacterDetails = () => {
+      
+      setSelectedCharacter(null);
+
+     }
+
 
 
   return (
@@ -77,7 +83,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
               <span key={index}>{skill}{index < selectedCharacter.singleUseSkill.length - 1 ? ', ' : ''}</span>
             ))}
           </p>
-          <p>Hit Points: {selectedCharacter.hitPoints}</p>
+          <p>Status Points: {selectedCharacter.statusPoints}</p>
           <p>Attack Roll: {selectedCharacter.attackRoll}</p>
           <p>
             Catch Phrases:{" "}
@@ -126,7 +132,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       {selectedCharacter && (
         <div className="character-details">
           <h3>{selectedCharacter.name}'s Details</h3>
-          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
+          <button onClick={() => saveCharacterDetails()}>Save</button>
         </div>
       )}
     </div>
