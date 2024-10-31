@@ -12,6 +12,7 @@ const PlayerHome = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); // To toggle the character form
+  
 
   const handleLogout = () => {
     console.log('Logging out...');
@@ -22,7 +23,6 @@ const PlayerHome = () => {
   const fetchCharacters = async () => {
     try {
       const allCharacters = await searchAllUserCharacters();
-
       setCharacters(allCharacters);
     } catch (err) {
       setError('No characters found. Create a character to start!');
@@ -53,7 +53,6 @@ const PlayerHome = () => {
   const handleCharacterSelect = (character) => {
     console.log('Selected character:', character);
   };
-
   if (loading) {
     return <p>Loading characters...</p>;
   }
@@ -84,15 +83,10 @@ const PlayerHome = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
-      </button>
+        </button>
       {showForm && (
-        <CharacterBuilder
-          onClose={toggleForm}
-          characters={characters}
-          onCharacterSelect={handleCharacterSelect}
-        />
+        <CharacterBuilder onClose={toggleForm} characters={characters} onCharacterSelect={handleCharacterSelect} />
       )}
-
       <h3>Your Characters</h3>
       <table>
         <thead>

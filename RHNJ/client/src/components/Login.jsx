@@ -26,32 +26,32 @@ const Login = () => {
     <div className='login-page'>
       <Navigations />
 
-      <div className='form'>
-        <div className='card-container'>
-          <form className='login-form' onSubmit={handleLogin}>
-            <div className='user-box'>
-              <input
-                type='text'
-                placeholder='Username:'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-            <div className='user-box'>
-              <input
-                type='password'
-                placeholder='Password:'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type='submit' className='btn'>
-              Log In
-            </button>
-          </form>
-        </div>
+    <div className='form'>
+      <div className='card-container'>
+        <form className='login-form' onSubmit={handleLogin}>
+          <div className='user-box'>
+            <input
+              type='text'
+              placeholder='Username:'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className='user-box'>
+            <input
+              type='password'
+              placeholder='Password:'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type='submit' className='btn'>
+            Log In
+          </button>
+        </form>
+      </div>
       </div>
     </div>
   );

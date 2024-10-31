@@ -10,6 +10,7 @@ const characters = [
       'I don’t just make headlines, darling—I am them.',
       'When I speak, everyone listens—whether they want to or not.',
     ],
+
     image: '/Images/BardImage.png',
     attributes: {
       strength: 8,
@@ -42,6 +43,7 @@ const characters = [
       'In my world, loyalty is law—and I’m judge, jury, and executioner.',
       'I don’t preach—I protect, and heaven help anyone who crosses me.',
     ],
+
     image: '/Images/ClericImage.png',
     attributes: {
       strength: 13,
@@ -132,6 +134,7 @@ const characters = [
       'I don’t play games, I write the rules.',
       'They call me calculating, but honey, that’s just called being smarter than you.',
     ],
+
     image: '/Images/WizardImage.png',
     attributes: {
       strength: 10,
