@@ -20,7 +20,7 @@ const characters = [
     savingThrows: ["dexterity", "charisma"],
     skills: [ "minorIllusion", "viciousMockery", "charmPerson", "detectMagic", "healingWord" ],
     singleUseSkill: ["thunderwave"],
-    hitPoints: 10,
+    statusPoints: 10,
     attackRoll: "1 D8 per level",
   },
 
@@ -43,7 +43,7 @@ const characters = [
     savingThrows: ["wisdom", "charisma"],
     skills: ["guidance", "mending", "bless", "healingWord", "shieldOfFaith"],
     singleUseSkill: ["guidingBolt"],
-    hitPoints: 10,
+    statusPoints: 10,
     attackRoll: "1 D8 per level",
   },
 
@@ -66,7 +66,7 @@ const characters = [
     savingThrows: ["strength", "charisma"],
     skills: ["intimidation", "attack", "duel", "twoHandedWeapon", "investigation"],
     singleUseSkill: ["actionSurge"],
-    hitPoints: 12,
+    statusPoints: 12,
     attackRoll: "1 D10 per level",
   },
 
@@ -89,7 +89,7 @@ const characters = [
     savingThrows: ["dexterity", "intelligence"],
     skills: ["sneakAttack", "thevesCant", "disguise", "cunningAction", "sleightOfHand"],
     singleUseSkill: ["poison"],
-    hitPoints: 10,
+    statusPoints: 10,
     attackRoll: "1 D8 per level",
   },
 
@@ -112,7 +112,7 @@ const characters = [
     savingThrows: ["intelligence", "wisdom"],
     skills: ["light", "mageHand", "rayOfFrost", "charmPerson", "shield"],
     singleUseSkill: ["magicMissle"],
-    hitPoints: 8,
+    statusPoints: 8,
     attackRoll: "1 D6 per level",
   },
 ];

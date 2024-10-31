@@ -4,7 +4,8 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-// import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
+import CharacterBuilder from '../components/CharacterBuilder'; // Component for creating/editing characters */
+
 
 const PlayerHome = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const PlayerHome = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); // To toggle the character form
+  
 
   const handleLogout = () => {
     console.log('Logging out...');
@@ -22,6 +24,7 @@ const PlayerHome = () => {
   const fetchCharacters = async () => {
     try {
       const allCharacters = await searchAllUserCharacters();
+      
       setCharacters(allCharacters);
     } catch (err) {
       setError('No characters found. Create a character to start!');
@@ -51,6 +54,10 @@ const PlayerHome = () => {
     setShowForm((prev) => !prev);
   };
 
+  const handleCharacterSelect = (character) => {
+    console.log('Selected character:', character);
+  };
+    
   
   if (loading) {
     return <p>Loading characters...</p>;
@@ -82,11 +89,11 @@ const PlayerHome = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
-      </button>
+        </button>
       {showForm && (
-        <CharacterForm onClose={toggleForm} refreshCharacters={fetchCharacters} />
+        <CharacterBuilder onClose={toggleForm} characters={characters} onCharacterSelect={handleCharacterSelect} />
       )}
-      <CharacterSelect characters={characters} />
+      
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -109,13 +116,7 @@ const PlayerHome = () => {
           ))}
         </tbody>
       </table>
-      {selectedCharacter && (
-        <div className="character-details">
-          <h3>{selectedCharacter.name}'s Details</h3>
-          <DataDisplay character={selectedCharacter} />
-          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
-        </div>
-      )}
+      
     </div>
   );
 };
