@@ -4,7 +4,7 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-// import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
+import CharacterBuilder from '../components/CharacterBuilder'; // Component for creating/editing characters */
 
 const PlayerHome = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const PlayerHome = () => {
   const fetchCharacters = async () => {
     try {
       const allCharacters = await searchAllUserCharacters();
+
       setCharacters(allCharacters);
     } catch (err) {
       setError('No characters found. Create a character to start!');
@@ -47,6 +48,10 @@ const PlayerHome = () => {
 
   const toggleForm = () => {
     setShowForm((prev) => !prev);
+  };
+
+  const handleCharacterSelect = (character) => {
+    console.log('Selected character:', character);
   };
 
   if (loading) {
@@ -81,12 +86,13 @@ const PlayerHome = () => {
         {showForm ? 'Cancel' : 'Add Character'}
       </button>
       {showForm && (
-        <CharacterForm
+        <CharacterBuilder
           onClose={toggleForm}
-          refreshCharacters={fetchCharacters}
+          characters={characters}
+          onCharacterSelect={handleCharacterSelect}
         />
       )}
-      <CharacterSelect characters={characters} />
+
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -113,15 +119,6 @@ const PlayerHome = () => {
           ))}
         </tbody>
       </table>
-      {selectedCharacter && (
-        <div className='character-details'>
-          <h3>{selectedCharacter.name}'s Details</h3>
-          <DataDisplay character={selectedCharacter} />
-          <button onClick={() => setSelectedCharacter(null)}>
-            Close Details
-          </button>
-        </div>
-      )}
     </div>
   );
 };

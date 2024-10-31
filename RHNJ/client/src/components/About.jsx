@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
-import Navigation from './Navigations';
+import Navigations from './Navigations';
 
 export default function About() {
   return (
     <div className='about-us'>
-      <Navigation />
+      <Navigations />
       <h1 className='about-h1'>About Us</h1>
       <h2 className='about-h2'>The Game</h2>
       <p className='abt-p'>Dungeons and Divas was created ..........</p>
