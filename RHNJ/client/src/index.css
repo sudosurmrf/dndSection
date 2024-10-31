@@ -31,11 +31,6 @@ nav {
   text-decoration: none;
 }
 
-nav {
-  background: rgba(0, 0, 0, 0);
-  padding: 10px;
-}
-
 ul {
   list-style-type: none;
   padding: 10px;
@@ -168,6 +163,11 @@ th {
 }
 
 /* Login Page and Signup Page */
+.navigation {
+  margin-left: 150px; /* Remove any left margin */
+  padding-left: 10px; /* Optional: Add some padding for spacing */
+}
+
 .navigation {
   margin-left: 150px; /* Remove any left margin */
   padding-left: 10px; /* Optional: Add some padding for spacing */
