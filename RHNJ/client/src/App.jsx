@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; // pulled Switch out of import************
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // pulled Switch out of import************
 import Login from './components/Login';
 import Signup from './components/SignUp';
 import AboutCharacters from './components/AboutCharacters';
@@ -12,12 +12,13 @@ import About from './components/About';
 import HowToPlay from './components/HowToPlay';
 import AdminSignUp from './components/AdminSignUp';
 import DmSignUp from './components/DmSignUp';
+import characters from './utils/characterList';
+import CharacterDetail from './components/CharacterDetail';
 import './App.css';
 
 function App() {
   return (
     <div>
-      
       <Routes>
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
@@ -25,7 +26,12 @@ function App() {
         <Route path='/how-to-play' element={<HowToPlay />} />
         <Route path='/admin-signup' element={<AdminSignUp />} />
         <Route path='/dm-signup' element={<DmSignUp />} />
-        <Route path='/about-characters' element={<AboutCharacters />} />
+        <Route
+          path='/about-characters'
+          element={<AboutCharacters characters={characters} />}
+        />
+        <Route path='/characters' element={<characterList />} />
+        <Route path='/character/:id' element={<CharacterDetail />} />
         <Route path='/admin-home' element={<AdminHome />} />
         <Route path='/dm-home' element={<DMHome />} />
         <Route path='/player-home' element={<PlayerHome />} />

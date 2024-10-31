@@ -12,29 +12,20 @@ const CharacterBuilder = ({onCharacterSelect}) => {
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
     const characterId = Number(event.target.value);
- 
+
     // Find the selected character based on ID
     const character = characters.find((char) => char.id === characterId);
     setSelectedCharacterId(characterId);
     setSelectedCharacter(character);
-    
 
     if (character) {
       onCharacterSelect(character);
     }
   };
-    const saveCharacterDetails = () => {
-      
-      setSelectedCharacter(null);
-
-     }
-
-
 
   return (
     <div>
-    
-      {/* Character Dropdown */}
+          {/* Character Dropdown */}
       <label htmlFor="character-select">Choose a Character:</label>
       <select
         id="character-select"
@@ -47,12 +38,12 @@ const CharacterBuilder = ({onCharacterSelect}) => {
           <option key={character.id} value={character.id} >
             {character.class}
           </option>
-          
         ))}
       </select>
 
       {/* Display Selected Character's Stats */}
       {selectedCharacter && (
+
         <div className="character-stats">
           <h3>{selectedCharacter.name}'s Stats</h3>
           <p>Description: {selectedCharacter.description}</p>
@@ -105,7 +96,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
             placeholder="Enter your character's ideals"
           />
 
-          <label htmlFor="flaws">
+         <label htmlFor="flaws">
             Flaws, skeletons in the closet, and other things that can be used against your character:
           </label>
           <input
@@ -140,5 +131,4 @@ const CharacterBuilder = ({onCharacterSelect}) => {
 };
 
 export default CharacterBuilder;
-
 

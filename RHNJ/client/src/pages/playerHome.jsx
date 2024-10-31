@@ -6,7 +6,6 @@ import {
 } from '../functions/userFunctions'; // Adjust imports as needed
 import CharacterBuilder from '../components/CharacterBuilder'; // Component for creating/editing characters */
 
-
 const PlayerHome = () => {
   const navigate = useNavigate();
   const [characters, setCharacters] = useState([]);
@@ -24,7 +23,6 @@ const PlayerHome = () => {
   const fetchCharacters = async () => {
     try {
       const allCharacters = await searchAllUserCharacters();
-      
       setCharacters(allCharacters);
     } catch (err) {
       setError('No characters found. Create a character to start!');
@@ -37,7 +35,6 @@ const PlayerHome = () => {
     fetchCharacters();
   }, []);
 
-
   const handleDelete = async (characterId) => {
     try {
       await deleteUserCharacter(characterId);
@@ -49,7 +46,6 @@ const PlayerHome = () => {
     }
   };
 
-
   const toggleForm = () => {
     setShowForm((prev) => !prev);
   };
@@ -57,8 +53,6 @@ const PlayerHome = () => {
   const handleCharacterSelect = (character) => {
     console.log('Selected character:', character);
   };
-    
-  
   if (loading) {
     return <p>Loading characters...</p>;
   }
@@ -93,7 +87,6 @@ const PlayerHome = () => {
       {showForm && (
         <CharacterBuilder onClose={toggleForm} characters={characters} onCharacterSelect={handleCharacterSelect} />
       )}
-      
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -109,14 +102,17 @@ const PlayerHome = () => {
               <td>{character.name}</td>
               <td>{character.level}</td>
               <td>
-                <button onClick={() => handleDelete(character.id)}>Delete</button>
-                <button onClick={() => setSelectedCharacter(character)}>View Details</button>
+                <button onClick={() => handleDelete(character.id)}>
+                  Delete
+                </button>
+                <button onClick={() => setSelectedCharacter(character)}>
+                  View Details
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      
     </div>
   );
 };
