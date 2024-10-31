@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-/* import characters from "./characterList"; */
+/* import PlayerHome from "../pages/playerHome"; */
+import characters from "./characterList";
+
 
 const CharacterBuilder = ({ characters }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
@@ -18,7 +20,8 @@ const CharacterBuilder = ({ characters }) => {
   return (
     <div>
       <h2>Select a Character</h2>
-
+    {/* <PlayerHome setSelectedCharacter={setSelectedCharacter} selectedCharacter={selectedCharacter} /> */}
+    
       {/* Character Dropdown */}
       <label htmlFor="character-select">Choose a Character:</label>
       <select
@@ -28,7 +31,7 @@ const CharacterBuilder = ({ characters }) => {
       >
         <option value="">-- Select a Character --</option>
         {characters.map((character) => (
-          <option key={character.id} value={character.id}>
+          <option key={character.id}>
             {character.name}
           </option>
         ))}
@@ -51,7 +54,7 @@ const CharacterBuilder = ({ characters }) => {
           <p>
             Saving Throws:{" "}
             {selectedCharacter.savingThrows.map((save, index) => (
-              <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
+              <span key={selectedCaracter.id}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
             ))}
           </p>
           <p>

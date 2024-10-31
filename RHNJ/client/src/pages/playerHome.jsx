@@ -6,13 +6,14 @@ import {
 } from '../functions/userFunctions'; // Adjust imports as needed
 import CharacterBuilder from '../utils/characterBuilder'; // Component for creating/editing characters */
 
-const PlayerHome = () => {
+
+const PlayerHome = ({setSelectedCharacter, selectedCharacter}) => {
   const navigate = useNavigate();
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); // To toggle the character form
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  
 
   const handleLogout = () => {
     console.log('Logging out...');
@@ -23,7 +24,7 @@ const PlayerHome = () => {
   const fetchCharacters = async () => {
     try {
       const allCharacters = await searchAllUserCharacters();
-      console.log(allCharacters);
+      
       setCharacters(allCharacters);
     } catch (err) {
       setError('No characters found. Create a character to start!');
@@ -85,9 +86,9 @@ const PlayerHome = () => {
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
       </button>
-      {showForm && (
-        <CharacterForm onClose={toggleForm} refreshCharacters={fetchCharacters} />
-      )}
+      {/* {showForm && (
+        <CharacterList onClose={toggleForm} refreshCharacters={fetchCharacters} />
+      )} */}
       <CharacterBuilder characters={characters} />
       <h3>Your Characters</h3>
       <table>
