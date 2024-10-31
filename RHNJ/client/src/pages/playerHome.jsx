@@ -4,10 +4,10 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-import CharacterBuilder from '../utils/characterBuilder'; // Component for creating/editing characters */
+import CharacterBuilder from '../components/CharacterBuilder'; // Component for creating/editing characters */
 
 
-const PlayerHome = ({setSelectedCharacter, selectedCharacter}) => {
+const PlayerHome = () => {
   const navigate = useNavigate();
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
@@ -54,6 +54,10 @@ const PlayerHome = ({setSelectedCharacter, selectedCharacter}) => {
     setShowForm((prev) => !prev);
   };
 
+  const handleCharacterSelect = (character) => {
+    console.log('Selected character:', character);
+  };
+    
   
   if (loading) {
     return <p>Loading characters...</p>;
@@ -85,11 +89,11 @@ const PlayerHome = ({setSelectedCharacter, selectedCharacter}) => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
-      </button>
-      {/* {showForm && (
-        <CharacterList onClose={toggleForm} refreshCharacters={fetchCharacters} />
-      )} */}
-      <CharacterBuilder characters={characters} />
+        </button>
+      {showForm && (
+        <CharacterBuilder onClose={toggleForm} characters={characters} onCharacterSelect={handleCharacterSelect} />
+      )}
+      
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -112,13 +116,7 @@ const PlayerHome = ({setSelectedCharacter, selectedCharacter}) => {
           ))}
         </tbody>
       </table>
-      {selectedCharacter && (
-        <div className="character-details">
-          <h3>{selectedCharacter.name}'s Details</h3>
-          <DataDisplay character={selectedCharacter} />
-          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
-        </div>
-      )}
+      
     </div>
   );
 };

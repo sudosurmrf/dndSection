@@ -1,39 +1,47 @@
 import React, { useState } from "react";
-/* import PlayerHome from "../pages/playerHome"; */
-import characters from "./characterList";
+import characters from "../utils/characterList";
 
 
-const CharacterBuilder = ({ characters }) => {
+const CharacterBuilder = ({onCharacterSelect}) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [ideals, setIdeals] = useState('');
+  const [flaws, setFlaws] = useState('');
+  const [notes, setNotes] = useState('');
 
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
-    const characterId = event.target.value;
-    setSelectedCharacterId(characterId);
-
+    const characterId = Number(event.target.value);
+ 
     // Find the selected character based on ID
     const character = characters.find((char) => char.id === characterId);
+    setSelectedCharacterId(characterId);
     setSelectedCharacter(character);
+    
+
+    if (character) {
+      onCharacterSelect(character);
+    }
   };
+
 
   return (
     <div>
-      <h2>Select a Character</h2>
-    {/* <PlayerHome setSelectedCharacter={setSelectedCharacter} selectedCharacter={selectedCharacter} /> */}
     
       {/* Character Dropdown */}
       <label htmlFor="character-select">Choose a Character:</label>
       <select
         id="character-select"
-        value={selectedCharacterId}
+       value={selectedCharacterId}
         onChange={handleCharacterChange}
       >
         <option value="">-- Select a Character --</option>
         {characters.map((character) => (
-          <option key={character.id}>
-            {character.name}
+    
+          <option key={character.id} value={character.id} >
+            {character.class}
           </option>
+          
         ))}
       </select>
 
@@ -44,17 +52,17 @@ const CharacterBuilder = ({ characters }) => {
           <p>Description: {selectedCharacter.description}</p>
           <ul>
             <li>Level: {selectedCharacter.level}</li>
-            <li>Strength: {selectedCharacter.stats.strength}</li>
-            <li>Dexterity: {selectedCharacter.stats.dexterity}</li>
-            <li>Constitution: {selectedCharacter.stats.constitution}</li>
-            <li>Intelligence: {selectedCharacter.stats.intelligence}</li>
-            <li>Wisdom: {selectedCharacter.stats.wisdom}</li>
-            <li>Charisma: {selectedCharacter.stats.charisma}</li>
+            <li>Strength: {selectedCharacter.strength}</li>
+            <li>Dexterity: {selectedCharacter.dexterity}</li>
+            <li>Constitution: {selectedCharacter.constitution}</li>
+            <li>Intelligence: {selectedCharacter.intelligence}</li>
+            <li>Wisdom: {selectedCharacter.wisdom}</li>
+            <li>Charisma: {selectedCharacter.charisma}</li>
           </ul>
           <p>
             Saving Throws:{" "}
             {selectedCharacter.savingThrows.map((save, index) => (
-              <span key={selectedCaracter.id}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
+              <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
             ))}
           </p>
           <p>
@@ -112,6 +120,13 @@ const CharacterBuilder = ({ characters }) => {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter personal notes"
           />
+        </div>
+        
+      )}
+      {selectedCharacter && (
+        <div className="character-details">
+          <h3>{selectedCharacter.name}'s Details</h3>
+          <button onClick={() => setSelectedCharacter(null)}>Close Details</button>
         </div>
       )}
     </div>
