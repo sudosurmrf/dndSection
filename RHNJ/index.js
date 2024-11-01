@@ -228,7 +228,7 @@ function createServer() {
     }
   });
 
-  app.get('/api/characters', authMiddleware, async (req, res) => {
+  app.get('/api/user/characters', authMiddleware, async (req, res) => {
     const characters = await prisma.userCharacter.findMany({
       where: { userId: req.user.id },
     });

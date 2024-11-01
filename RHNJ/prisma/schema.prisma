@@ -18,6 +18,7 @@ model UserCharacter {
   id              Int             @id @default(autoincrement())
   userId          Int
   characterName   String
+  characterDescription String
   characterClass  String
   characterLevel  Int
   characterImage  String
@@ -34,10 +35,17 @@ model UserCharacter {
   attackRoll Int
   catchPhrases String[] // Array for catch phrases
   abilities       String[] 
+<<<<<<< HEAD:RHNJ/prisma/schema.prisma
   ideals    String
   flaws     String
   notes     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+=======
+  catchphrases    String[]
+>>>>>>> 788297bcfcfecb7d6cfb6106c2a19c9e43599d48:RHNJ/server/prisma/schema.prisma
   user            User            @relation(fields: [userId], references: [id])
+  ideals          String
+  flaws           String
+  notes           String
 }

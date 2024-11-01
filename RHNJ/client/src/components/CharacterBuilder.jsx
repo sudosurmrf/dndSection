@@ -4,25 +4,27 @@ import axios from 'axios';
 
 const CharacterBuilder = ({onCharacterSelect}) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState(null); 
   const [ideals, setIdeals] = useState('');
   const [flaws, setFlaws] = useState('');
   const [notes, setNotes] = useState('');
 
+  console.log("Characters array:", characters);
+
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
     const characterId = Number(event.target.value);
- 
+
     // Find the selected character based on ID
     const character = characters.find((char) => char.id === characterId);
     setSelectedCharacterId(characterId);
     setSelectedCharacter(character);
-    
 
     if (character) {
       onCharacterSelect(character);
     }
   };
+<<<<<<< HEAD
     
   const saveCharacterDetails = async () => {
     const characterData = {
@@ -65,13 +67,16 @@ const CharacterBuilder = ({onCharacterSelect}) => {
   //     setSelectedCharacter(null);
 
   //    }
-
-
+=======
+    const saveCharacterDetails = () => {
+      
+      setSelectedCharacter(null);
+     }
+>>>>>>> 788297bcfcfecb7d6cfb6106c2a19c9e43599d48
 
   return (
     <div>
-    
-      {/* Character Dropdown */}
+          {/* Character Dropdown */}
       <label htmlFor="character-select">Choose a Character:</label>
       <select
         id="character-select"
@@ -79,17 +84,17 @@ const CharacterBuilder = ({onCharacterSelect}) => {
         onChange={handleCharacterChange}
       >
         <option value="">-- Select a Character --</option>
-        {characters.map((character) => (
+        {characters.map((character) => (                              
     
           <option key={character.id} value={character.id} >
             {character.class}
           </option>
-          
         ))}
       </select>
 
       {/* Display Selected Character's Stats */}
       {selectedCharacter && (
+
         <div className="character-stats">
           <h3>{selectedCharacter.name}'s Stats</h3>
           <p>Description: {selectedCharacter.description}</p><br></br>
@@ -104,7 +109,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
           </ul>
           <p>
             Saving Throws:{" "}
-            {selectedCharacter.savingThrows.map((save, index) => (
+            {selectedCharacter.savingThrows?.map((save, index) => (
               <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
             ))}
           </p>
@@ -142,7 +147,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
             placeholder="Enter your character's ideals"
           />
 
-          <label htmlFor="flaws">
+         <label htmlFor="flaws">
             Flaws, skeletons in the closet, and other things that can be used against your character:
           </label>
           <input
@@ -178,5 +183,4 @@ const CharacterBuilder = ({onCharacterSelect}) => {
 
 
 export default CharacterBuilder;
-
 

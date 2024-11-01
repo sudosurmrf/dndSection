@@ -31,7 +31,7 @@ const Navigations = () => {
             </Link>
           </li>
           <li>
-            <Link to='/characters' className='navtext'>
+            <Link to='/about-characters' className='navtext'>
               Characters
             </Link>
           </li>
