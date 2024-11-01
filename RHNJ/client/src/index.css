@@ -13,10 +13,12 @@ nav {
   justify-content: space-between;
   padding: 10px;
   background: rgba(0, 0, 0, 0);
+  z-index: 1000;
 }
 
 .navtext {
   color: goldenrod;
+  margin-left: 60px;
 }
 
 .navtext2 {
@@ -291,17 +293,101 @@ button {
 
 /* About Characters page */
 .about-character {
-  background-image: url('../Images/background-image2.gif');
-  background-size: cover; /* Ensure the image covers the entire container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  height: 100vh; /* Full viewport height */
-  overflow: auto; /* Adds scroll bars when content exceeds the viewport */
-  color: goldenrod; /* Text color */
-  margin: 0; /* Reset margin */
-  padding: 20px; /* Add padding */
-  display: flex; /* Use flexbox for alignment */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  text-align: center; /* Center text */
+  background-image: url(./Images/background-image2.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: stretch;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: auto; /* adds scroll bars when content exceeds the viewport */
+  /* width: 100%; */
+  color: goldenrod;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
+/* Character details */
+.char-img {
+  height: 200px;
+  width: auto;
+}
+.character-detail {
+  background-image: url(./Images/background-image2.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: stretch;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: auto; /* adds scroll bars when content exceeds the viewport */
+  /* width: 100%; */
+  color: goldenrod;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.img2 {
+  height: 500px;
+  width: auto;
+}
+
+.char-att {
+  color: aliceblue;
+}
+
+.char-cp {
+  color: antiquewhite;
+}
+
+.char-link {
+  color: beige;
+}
+
+/* Player Home page */
+@layer library, reset, base, demo;
+@import 'https://unpkg.com/open-props@2.0.0-beta.5' layer(library);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  :where(:not(dialog)) {
+    margin: 0;
+  }
+}
+
+@layer base {
+  html {
+    --nav-block-size: 74px;
+    --brand-gradient: linear-gradient(227deg, #1400c7 0%, #00bbff 100%);
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    min-block-size: 100dvb;
+  }
+}
+

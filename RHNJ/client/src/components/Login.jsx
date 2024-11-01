@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api';
 import { Link } from 'react-router-dom'; // Import Link for navigation
-import Navigation from './Navigations';
+import Navigations from './Navigations';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <div className='login-page'>
-    <Navigation />
+      <Navigations />
 
     <div className='form'>
       <div className='card-container'>

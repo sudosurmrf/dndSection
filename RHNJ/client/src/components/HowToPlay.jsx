@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
-import Navigation from './Navigations';
+import Navigations from './Navigations';
 
 export default function HowToPlay() {
   return (
     <div className='how-to-play'>
-      <Navigation />
+      <Navigations />
       <h1 className='htp-head-text'> How to Play Dungeons and Divas:</h1>
       <h2 className='htp-text'>Getting Started</h2>
       <p>
