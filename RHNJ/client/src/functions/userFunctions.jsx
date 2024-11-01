@@ -1,6 +1,4 @@
-/*search all and serch single player*/
-/* search all user characters, search single user character, edit user character, delete user character */
-const API_URL = 'http://localhost:3000/api'; // Update with your API URL
+const API_URL = 'http://localhost:3000/api'; 
 const token = localStorage.getItem('token');
 
 // Helper function for making fetch requests

@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const prisma = new PrismaClient();
+const app = express();
+app.use(cors()); // Added this line
+app.use(express.json());
 
 const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';
 const payload = { id: 1 };
@@ -54,9 +57,7 @@ function authMiddleware(req, res, next) {
 
 // Create Express server
 function createServer() {
-  const app = express();
-  app.use(cors()); // Added this line
-  app.use(express.json());
+ 
 
   app.get('/test', (req, res) => {
     res.send('Server is up and running!');
@@ -165,6 +166,7 @@ function createServer() {
     }
   });
 
+
   app.delete('/api/characters/:id', authMiddleware, async (req, res, next) => {
     try {
       const characterId = Number(req.params.id);
@@ -203,6 +205,19 @@ function createServer() {
       next(error);
     }
   });
+  
+  app.post('http://localhost:3000/api/characters/save-character', async (req, res) => {
+    try {
+      const characterData = req.body;
+      const savedCharacter = await prisma.userCharacter.create({
+        data: characterData,
+      });
+      res.status(200).json(savedCharacter);
+    } catch (error) {
+      console.error("Error saving character:", error);
+      res.status(500).json({ error: "Error saving character" });
+    }
+  });
 
   app.get('/api/users', async (req, res, next) => {
     try {
@@ -232,13 +247,14 @@ function createServer() {
 }
 
 // Start the server
-const app = createServer();
+// const app = createServer();
 
 const startServer = async () => {
   await prisma.$connect();
   app.listen(3000, () => {
     console.log('Listening on port 3000');
   });
+  
 };
 
 startServer();

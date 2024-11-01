@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import characters from "../utils/characterList";
-
+import axios from 'axios';
 
 const CharacterBuilder = ({onCharacterSelect}) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
@@ -23,11 +23,48 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       onCharacterSelect(character);
     }
   };
-    const saveCharacterDetails = () => {
-      
-      setSelectedCharacter(null);
+    
+  const saveCharacterDetails = async () => {
+    const characterData = {
+      userId: selectedCharacter.userId,
+      characterId: selectedCharacter.id,
+      characterName: selectedCharacter.CharacterName,
+      characterClass: selectedCharacter.characterClass,
+      characterLevel: selectedCharacter.characterLevel,
+      characterImage: selectedCharacter.characterImage,
+      strength: selectedCharacter.strength,
+      dexterity: selectedCharacter.dexterity,
+      constitution: selectedCharacter.constitution,
+      intelligence: selectedCharacter.intelligence,
+      wisdom: selectedCharacter.wisdom,
+      charisma: selectedCharacter.charisma,
+      savingThrows: selectedCharacter.savingThrows,
+      skills: selectedCharacter.skills,
+      singleUseSkill: selectedCharacter.singleUseSkill,
+      statusPoints: selectedCharacter.statusPoints,
+      attackRoll: selectedCharacter.attackRoll,
+      catchPhrases: selectedCharacter.catchPhrases,
+      abilities: selectedCharacter.abilities,
+      ideals,
+      flaws,
+      notes,
+    };
 
-     }
+    console.log(characterData);
+  
+    try {
+      const response = await axios.post('/api/characters/save-character',);
+      console.log("Character saved:", response.data);
+      setSelectedCharacter(null); // Clear selected character
+    } catch (error) {
+      console.error("Error saving character:", error);
+    }
+  }; 
+  // const saveCharacterDetails = () => {
+  
+  //     setSelectedCharacter(null);
+
+  //    }
 
 
 
@@ -55,7 +92,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       {selectedCharacter && (
         <div className="character-stats">
           <h3>{selectedCharacter.name}'s Stats</h3>
-          <p>Description: {selectedCharacter.description}</p>
+          <p>Description: {selectedCharacter.description}</p><br></br>
           <ul>
             <li>Level: {selectedCharacter.level}</li>
             <li>Strength: {selectedCharacter.strength}</li>
@@ -138,6 +175,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
     </div>
   );
 };
+
 
 export default CharacterBuilder;
 
