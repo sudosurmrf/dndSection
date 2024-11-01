@@ -24,7 +24,6 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       onCharacterSelect(character);
     }
   };
-<<<<<<< HEAD
     
   const saveCharacterDetails = async () => {
     const characterData = {
@@ -67,12 +66,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
   //     setSelectedCharacter(null);
 
   //    }
-=======
-    const saveCharacterDetails = () => {
-      
-      setSelectedCharacter(null);
-     }
->>>>>>> 788297bcfcfecb7d6cfb6106c2a19c9e43599d48
+  
 
   return (
     <div>
