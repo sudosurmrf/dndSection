@@ -39,7 +39,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
         onChange={handleCharacterChange}
       >
         <option value="">-- Select a Character --</option>
-        {characters.map((character) => (                              /*try (characters || []) if the ? doesn't work */
+        {characters.map((character) => (                              
     
           <option key={character.id} value={character.id} >
             {character.class}

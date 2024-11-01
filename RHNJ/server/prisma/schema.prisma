@@ -23,6 +23,7 @@ model User {
 model UserCharacter {
   id              Int             @id @default(autoincrement())
   characterName   String
+  characterDescription String
   characterClass  String
   characterLevel  Int
   characterImage  String
