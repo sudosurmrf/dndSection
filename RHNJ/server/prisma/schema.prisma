@@ -35,5 +35,9 @@ model UserCharacter {
   charisma        Int
   statusPoints    Int
   abilities       String[] 
+  catchphrases    String[]
   user            User            @relation(fields: [userId], references: [id])
+  ideals          String
+  flaws           String
+  notes           String
 }

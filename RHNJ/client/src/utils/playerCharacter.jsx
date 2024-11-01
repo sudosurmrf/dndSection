@@ -31,20 +31,20 @@ export default function playerCharacter({ }) {
                   <td><input type='text' class='small' name='dexmod'/></td>
                 </tr>
                 tr>
-                <td><label>CON</label> <input type='text' class="small" name='dex'></td>
-                  <td><input type='text' class='small' name='dexmod'></td>
+                <td><label>CON</label> <input type='text' class="small" name='dex'/></td>
+                  <td><input type='text' class='small' name='dexmod'/></td>
                 </tr>
                 <tr>
-                  <td><label>INT</label> <input type='text' class="small" name='int'></td>
-                    <td><input type='text' class='small' name='intmod'></td>
+                  <td><label>INT</label> <input type='text' class="small" name='int'/></td>
+                    <td><input type='text' class='small' name='intmod'/></td>
                   </tr>
             <tr>
-              <td><label>WIS</label> <input type='text' class="small" name='wis'></td>
-                <td><input type='text' class='small' name='wismod'></td>
+              <td><label>WIS</label> <input type='text' class="small" name='wis'/></td>
+                <td><input type='text' class='small' name='wismod'/></td>
               </tr>
             <tr>
-              <td><label>CHA</label> <input type='text' class="small" name='cha'></td>
-                <td><input type='text' class='small' name='chamod'></td>
+              <td><label>CHA</label> <input type='text' class="small" name='cha'/></td>
+                <td><input type='text' class='small' name='chamod/'/></td>
                 </tr>
            </table>
           </fieldset>
@@ -52,29 +52,29 @@ export default function playerCharacter({ }) {
               <form id='combatinfo'>
                  <fieldset id="saves">
             <legend>Combat Information</legend><br/>
-            Armor Class: <input type='text' class="small" name='ac'><br/>
+            Armor Class: <input type='text' class="small" name='ac'/><br/>
                 <legend>Saves</legend><br/>
                 <table>
                  <tr>
-                   <td><label>Reflex:</label> <input type='text' class="small" name='ref'><br/></td>
-                                          <td><input type='text' class="small" name='refbase'></td>
-                       <td><input type='text' class="small" name='refabil'></td>
-                         <td><input type='text' class="small" name='refmagic'></td>
-                           <td><input type='text' class="small" name='refmisc'></td>
+                   <td><label>Reflex:</label> <input type='text' class="small" name='ref'/><br/></td>
+                                          <td><input type='text' class="small" name='refbase'/></td>
+                       <td><input type='text' class="small" name='refabil'/></td>
+                         <td><input type='text' class="small" name='refmagic'/></td>
+                           <td><input type='text' class="small" name='refmisc'/></td>
                    </tr>
             <tr>
-              <td><label>Will:</label> <input type='text' class="small" name='will'><br/></td>
-                                     <td><input type='text' class="small" name='willbase'></td>
-                       <td><input type='text' class="small" name='willabil'></td>
-                         <td><input type='text' class="small" name='willmagic'></td>
-                           <td><input type='text' class="small" name='willmisc'></td>
+              <td><label>Will:</label> <input type='text' class="small" name='will'/><br/></td>
+                                     <td><input type='text' class="small" name='willbase'/></td>
+                       <td><input type='text' class="small" name='willabil'/></td>
+                         <td><input type='text' class="small" name='willmagic'/></td>
+                           <td><input type='text' class="small" name='willmisc'/></td>
              </tr>
               <tr>
-                <td><label>Fortitude:</label> <input type='text' class="small" name='fort'><br/></td>
-                                       <td><input type='text' class="small" name='fortbase'></td>
-                       <td><input type='text' class="small" name='fortabil'></td>
-                         <td><input type='text' class="small" name='fortmagic'></td>
-                           <td><input type='text' class="small" name='fortmisc'></td>
+                <td><label>Fortitude:</label> <input type='text' class="small" name='fort'/><br/></td>
+                                       <td><input type='text' class="small" name='fortbase'/></td>
+                       <td><input type='text' class="small" name='fortabil'/></td>
+                         <td><input type='text' class="small" name='fortmagic'/></td>
+                           <td><input type='text' class="small" name='fortmisc'/></td>
              </tr>
                </table>
                </fieldset>

@@ -4,10 +4,12 @@ import characters from "../utils/characterList";
 
 const CharacterBuilder = ({onCharacterSelect}) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState(null); 
   const [ideals, setIdeals] = useState('');
   const [flaws, setFlaws] = useState('');
   const [notes, setNotes] = useState('');
+
+  console.log("Characters array:", characters);
 
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
@@ -22,6 +24,10 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       onCharacterSelect(character);
     }
   };
+    const saveCharacterDetails = () => {
+      
+      setSelectedCharacter(null);
+     }
 
   return (
     <div>
@@ -33,7 +39,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
         onChange={handleCharacterChange}
       >
         <option value="">-- Select a Character --</option>
-        {characters.map((character) => (
+        {characters.map((character) => (                              /*try (characters || []) if the ? doesn't work */
     
           <option key={character.id} value={character.id} >
             {character.class}
@@ -58,7 +64,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
           </ul>
           <p>
             Saving Throws:{" "}
-            {selectedCharacter.savingThrows.map((save, index) => (
+            {selectedCharacter.savingThrows?.map((save, index) => (
               <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
             ))}
           </p>
