@@ -4,7 +4,7 @@ import {
   searchAllUserCharacters,
   deleteUserCharacter,
 } from '../functions/userFunctions'; // Adjust imports as needed
-// import CharacterForm from '././components/CharacterForm'; // Component for creating/editing characters */
+import CharacterBuilder from '../components/CharacterBuilder'; // Component for creating/editing characters */
 
 const PlayerHome = () => {
   const navigate = useNavigate();
@@ -12,27 +12,26 @@ const PlayerHome = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false); // To toggle the character form
+  
 
   const handleLogout = () => {
     console.log('Logging out...');
     localStorage.removeItem('token'); // Remove token from storage
-    navigate('/'); // Redirect to the home or login page
+    navigate('/login'); // Redirect to the home or login page
+  };
+
+  const fetchCharacters = async () => {
+    try {
+      const allCharacters = await searchAllUserCharacters();
+      setCharacters(allCharacters);
+    } catch (err) {
+      setError('No characters found. Create a character to start!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const allCharacters = await searchAllUserCharacters(); // Implement this function in userFunctions
-        setCharacters(allCharacters);
-      } catch (err) {
-        setError(
-          'You have no characters, yet. Please create a character to start your quest!'
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCharacters();
   }, []);
 
@@ -51,6 +50,9 @@ const PlayerHome = () => {
     setShowForm((prev) => !prev);
   };
 
+  const handleCharacterSelect = (character) => {
+    console.log('Selected character:', character);
+  };
   if (loading) {
     return <p>Loading characters...</p>;
   }
@@ -81,14 +83,10 @@ const PlayerHome = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={toggleForm}>
         {showForm ? 'Cancel' : 'Add Character'}
-      </button>
+        </button>
       {showForm && (
-        <CharacterForm
-          onClose={toggleForm}
-          refreshCharacters={fetchCharacters}
-        />
-      )}{' '}
-      {/* Assuming CharacterForm handles character creation */}
+        <CharacterBuilder onClose={toggleForm} characters={characters} onCharacterSelect={handleCharacterSelect} />
+      )}
       <h3>Your Characters</h3>
       <table>
         <thead>
@@ -107,7 +105,9 @@ const PlayerHome = () => {
                 <button onClick={() => handleDelete(character.id)}>
                   Delete
                 </button>
-                {/* Add more actions like Edit if needed. text box for notes and flaws and ideals */}
+                <button onClick={() => setSelectedCharacter(character)}>
+                  View Details
+                </button>
               </td>
             </tr>
           ))}

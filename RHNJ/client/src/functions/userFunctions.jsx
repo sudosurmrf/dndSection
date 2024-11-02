@@ -1,6 +1,7 @@
 /*search all and serch single player*/
 /* search all user characters, search single user character, edit user character, delete user character */
 const API_URL = 'http://localhost:3000/api'; // Update with your API URL
+const token = localStorage.getItem('token');
 
 // Helper function for making fetch requests
 const fetchData = async (url, options) => {
@@ -32,10 +33,17 @@ export const searchSingleUser = async (userId) => {
   }
 };
 
-// Search all characters for a user
-export const searchAllUserCharacters = async (userId) => {
+// Get all characters for a user
+export const searchAllUserCharacters = async () => {
   try {
-    return await fetchData(`${API_URL}/users/${userId}/characters`);
+    return await fetchData(`${API_URL}/user/characters`, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      }  
+    );
   } catch (error) {
     console.error('Error fetching user characters:', error);
     throw error;
