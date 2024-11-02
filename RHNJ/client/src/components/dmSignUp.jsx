@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // If you're using React Router
+import {useNavigate} from 'react-router-dom'; // If you're using React Router
 /* import { dmSignUp } from '../functions/userFunctions'; // Adjust import based on your file structure */
 
-export default function DmSignUp() {
+export default function DmSignUp () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -60,5 +60,5 @@ export default function DmSignUp() {
         <button type='submit'>Sign Up</button>
       </form>
     </div>
-  );
-}
+ );
+};
