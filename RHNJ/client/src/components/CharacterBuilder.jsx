@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import characters from "../utils/characterList";
 
+
+
+
 const CharacterBuilder = ({onCharacterSelect}) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState(null); 
@@ -8,17 +11,16 @@ const CharacterBuilder = ({onCharacterSelect}) => {
   const [ideals, setIdeals] = useState('');
   const [flaws, setFlaws] = useState('');
   const [notes, setNotes] = useState('');
+  const [characterName, setCharacterName] = useState('');
 
-  console.log("Characters array:", characters);
-
-  console.log("Characters array:", characters);
-
+  
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
     const characterId = Number(event.target.value);
 
     // Find the selected character based on ID
     const character = characters.find((char) => char.id === characterId);
+    console.log(character);
     setSelectedCharacterId(characterId);
     setSelectedCharacter(character);
 
@@ -26,33 +28,33 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       onCharacterSelect(character);
     }
   };
+   
 
-  const characterData = {
-    userId: selectedCharacter.userId,
-    characterId: selectedCharacter.id,
-    characterName: selectedCharacter.CharacterName,
-    characterClass: selectedCharacter.characterClass,
-    characterLevel: selectedCharacter.characterLevel,
-    characterImage: selectedCharacter.characterImage,
-    strength: selectedCharacter.strength,
-    dexterity: selectedCharacter.dexterity,
-    constitution: selectedCharacter.constitution,
-    intelligence: selectedCharacter.intelligence,
-    wisdom: selectedCharacter.wisdom,
-    charisma: selectedCharacter.charisma,
-    savingThrows: selectedCharacter.savingThrows,
-    skills: selectedCharacter.skills,
-    singleUseSkill: selectedCharacter.singleUseSkill,
-    statusPoints: selectedCharacter.statusPoints,
-    attackRoll: selectedCharacter.attackRoll,
-    catchPhrases: selectedCharacter.catchPhrases,
-    abilities: selectedCharacter.abilities,
-    ideals,
-    flaws,
-    notes,
-  };
-
-  const saveCharacterDetails = async (characterData) => {
+  const saveCharacterDetails = async () => {
+    let characterData = {
+      userId: selectedCharacter.userId,
+      characterId: selectedCharacter.id,
+      level: selectedCharacter.level,
+      characterName: characterName,
+      class: selectedCharacter.class,
+      image: selectedCharacter.image,
+      strength: selectedCharacter.attribute.strength,
+      dexterity: selectedCharacter.attribute.dexterity,
+      constitution: selectedCharacter.attribute.constitution,
+      intelligence: selectedCharacter.attribute.intelligence,
+      wisdom: selectedCharacter.attribute.wisdom,
+      charisma: selectedCharacter.attribute.charisma,
+      savingThrows: selectedCharacter.attribute.savingThrows,
+      skills: selectedCharacter.skills,
+      singleUseSkill: selectedCharacter.singleUseSkill,
+      statusPoints: selectedCharacter.statusPoints,
+      attackRoll: selectedCharacter.attackRoll,
+      catchPhrases: selectedCharacter.catchPhrases,
+      abilities: selectedCharacter.abilities,
+      ideals: ideals,
+      flaws: flaws,
+      notes: notes,
+    };
     setCharacterDetails(characterData);
     console.log(characterData);
 
@@ -109,7 +111,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
             type="text"
             id="character-name"
             name="character-name"
-            value={characterName}
+            value={selectedCharacter.characterName}
             onChange={(e) => setCharacterName(e.target.value)}
             placeholder="Enter your character's name"
           />
@@ -117,12 +119,12 @@ const CharacterBuilder = ({onCharacterSelect}) => {
           <p>Description: {selectedCharacter.description}</p><br></br>
           <ul>
             <li>Level: {selectedCharacter.level}</li>
-            <li>Strength: {selectedCharacter.strength}</li>
-            <li>Dexterity: {selectedCharacter.dexterity}</li>
-            <li>Constitution: {selectedCharacter.constitution}</li>
-            <li>Intelligence: {selectedCharacter.intelligence}</li>
-            <li>Wisdom: {selectedCharacter.wisdom}</li>
-            <li>Charisma: {selectedCharacter.charisma}</li>
+            <li>Strength: {selectedCharacter.attributes.strength}</li>
+            <li>Dexterity: {selectedCharacter.attributes.dexterity}</li>
+            <li>Constitution: {selectedCharacter.attributes.constitution}</li>
+            <li>Intelligence: {selectedCharacter.attributes.intelligence}</li>
+            <li>Wisdom: {selectedCharacter.attributes.wisdom}</li>
+            <li>Charisma: {selectedCharacter.attributes.charisma}</li>
           </ul>
           <p>
             Saving Throws:{" "}
@@ -192,8 +194,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
       {selectedCharacter && (
         <div className="character-details">
           <h3>{selectedCharacter.name}'s Details</h3>
-          <button onClick={() => saveCharacterDetails(characterData)}>Save</button>
-          <button onClick={() => saveCharacterDetails(characterData)}>Save</button>
+          <button onClick={() => saveCharacterDetails()}>Save</button>
         </div>
       )}
     </div>
