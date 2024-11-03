@@ -14,11 +14,16 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login({ username, password });
-      localStorage.setItem('token', response.data.token);
-      console.log('Login successful:', response.data);
+      // const results = await response.json();
+      console.log('Login successful:', response);
+      localStorage.setItem('token', response.token);
+      // console.log('Login successful:', response.data);
       navigate('/player-home'); // Redirect to home or another page
     } catch (error) {
-      console.error('Login failed:', error.response.data);
+      const errorMessage = error.response
+        ? error.response.data
+        : 'Login failed. Please check your credentials.';
+      console.error('Login failed:', errorMessage);
     }
   };
 
@@ -26,32 +31,32 @@ const Login = () => {
     <div className='login-page'>
       <Navigations />
 
-    <div className='form'>
-      <div className='card-container'>
-        <form className='login-form' onSubmit={handleLogin}>
-          <div className='user-box'>
-            <input
-              type='text'
-              placeholder='Username:'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className='user-box'>
-            <input
-              type='password'
-              placeholder='Password:'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type='submit' className='btn'>
-            Log In
-          </button>
-        </form>
-      </div>
+      <div className='form'>
+        <div className='card-container'>
+          <form className='login-form' onSubmit={handleLogin}>
+            <div className='user-box'>
+              <input
+                type='text'
+                placeholder='Username:'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className='user-box'>
+              <input
+                type='password'
+                placeholder='Password:'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type='submit' className='btn'>
+              Log In
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
