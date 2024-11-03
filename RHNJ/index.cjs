@@ -228,6 +228,7 @@ app.put('/api/characters/:id', authMiddleware, async (req, res, next) => {
 app.post(
   'http://localhost:3000/api/characters/save-character',
   async (req, res) => {
+    console.log("reached the server");
     try {
       const characterData = req.body;
       const savedCharacter = await prisma.userCharacter.create({
