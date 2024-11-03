@@ -19,3 +19,4 @@ ADD COLUMN     "savingThrows" TEXT[],
 ADD COLUMN     "singleUseSkill" TEXT[],
 ADD COLUMN     "skills" TEXT[],
 ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+

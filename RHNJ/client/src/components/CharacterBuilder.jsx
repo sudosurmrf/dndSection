@@ -11,6 +11,8 @@ const CharacterBuilder = ({onCharacterSelect}) => {
 
   console.log("Characters array:", characters);
 
+  console.log("Characters array:", characters);
+
   // Handle character selection from the dropdown
   const handleCharacterChange = (event) => {
     const characterId = Number(event.target.value);
@@ -88,6 +90,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
         onChange={handleCharacterChange}
       >
         <option value="">-- Select a Character --</option>
+                                   
         {characters.map((character) => (                              
     
           <option key={character.id} value={character.id} >
@@ -123,6 +126,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
           </ul>
           <p>
             Saving Throws:{" "}
+            
             {selectedCharacter.savingThrows?.map((save, index) => (
               <span key={index}>{save}{index < selectedCharacter.savingThrows.length - 1 ? ', ' : ''}</span>
             ))}
@@ -189,6 +193,7 @@ const CharacterBuilder = ({onCharacterSelect}) => {
         <div className="character-details">
           <h3>{selectedCharacter.name}'s Details</h3>
           <button onClick={() => saveCharacterDetails(characterData)}>Save</button>
+          <button onClick={() => saveCharacterDetails(characterData)}>Save</button>
         </div>
       )}
     </div>
@@ -196,5 +201,5 @@ const CharacterBuilder = ({onCharacterSelect}) => {
 };
 
 
-export default CharacterBuilder;
 
+export default CharacterBuilder;

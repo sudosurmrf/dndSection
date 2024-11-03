@@ -4,6 +4,23 @@
 // client/src/functions/adminFunctions.jsx
 import { fetchUsers } from '../api';
 
+/* export const searchSingleUser = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/users/${userId}`);
+
+    // Check if the response is OK (status code 200-299)
+    if (!response.ok) {
+      throw new Error(`Error fetching user: ${response.statusText}`);
+    }
+
+    // Parse and return the response data as JSON
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error; // Re-throw the error for further handling
+  }
+}; */
+
 export const searchSingleUser = async (userId) => {
   try {
     const response = await fetch(`${API_URL}/users/${userId}`);

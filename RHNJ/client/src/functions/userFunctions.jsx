@@ -11,6 +11,30 @@ const fetchData = async (url, options) => {
   return response.json();
 };
 
+// DM Signup
+export const DmSignUp = async (newDM) => {
+  try {
+    const response = await fetch(`${API_URL}/auth/dm-signup`, {
+      // Adjust the endpoint as necessary
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newDM),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error signing up');
+    }
+
+    return await response.json(); // Return the response data if needed
+  } catch (error) {
+    console.error('Error during DM signup:', error);
+    throw error;
+  }
+};
+
 // Search all users
 export const searchAllUsers = async () => {
   try {
@@ -34,14 +58,12 @@ export const searchSingleUser = async (userId) => {
 // Get all characters for a user
 export const searchAllUserCharacters = async () => {
   try {
-    return await fetchData(`${API_URL}/user/characters`, 
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      }  
-    );
+    return await fetchData(`${API_URL}/user/characters`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
     console.error('Error fetching user characters:', error);
     throw error;
