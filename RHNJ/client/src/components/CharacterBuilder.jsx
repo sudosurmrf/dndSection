@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import characters from '../utils/characterList';
+import { createCharacter } from '../api';
 
 const CharacterBuilder = ({ onCharacterSelect }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
@@ -52,29 +53,24 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
     };
     setCharacterDetails(characterData);
     console.log(characterData);
+    const token = localStorage.getItem('token');
+    // const saveCharacterDetails = async(characterData) => {
+      try {
+        const response = await createCharacter(characterData, token);
 
-    try {
-      const response = await fetch('/api/characters/save-character', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ characterDetails }),
-      });
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+        const data = await response.json();
+        console.log('Character saved:', data);
+
+        setSelectedCharacter(null); // Clear selected character
+      } catch (error) {
+        console.error('Error saving character:', error);
       }
-
-      const data = await response.json();
-      console.log('Character saved:', data);
-
-      setSelectedCharacter(null); // Clear selected character
-    } catch (error) {
-      console.error('Error saving character:', error);
-    }
-  };
-  // const saveCharacterDetails = () => {
+    };
+  
 
   //     setSelectedCharacter(null);
 

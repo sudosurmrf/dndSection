@@ -48,8 +48,25 @@ export const fetchCharacters = (token) => {
   return request('/characters', 'GET', null, token);
 };
 
-export const createCharacter = (token, characterData) => {
-  return request('/characters', 'POST', characterData, token);
+export const createCharacter = async (req, res, next) => {
+  try{
+    const { characterData, token } = req.body;
+
+    const character = await fetch(`${baseURL}/characters`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ characterData: characterData})
+    });
+    const results = await character.json();
+    res.json(results);
+    // res.status(201).json({ message:  'character created!', character});
+
+  }catch(err) {
+    res.status(401).json({ message: `character not created`, err});
+  }
 };
 
 // User functions

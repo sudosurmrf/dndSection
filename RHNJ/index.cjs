@@ -12,19 +12,19 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // Added this line
 app.use(express.json());
 
-const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';
-const payload = { id: 1 };
+// const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';
+// const payload = { id: 1 };
 
-const token = jwt.sign(payload, secret);
-console.log('Generated Token:', token);
+// const token = jwt.sign(payload, secret);
+// console.log('Generated Token:', token);
 
-jwt.verify(token, secret, (err, decoded) => {
-  if (err) {
-    console.error('Verification Error:', err);
-  } else {
-    console.log('Decoded Token:', decoded);
-  }
-});
+// jwt.verify(token, secret, (err, decoded) => {
+//   if (err) {
+//     console.error('Verification Error:', err);
+//   } else {
+//     console.log('Decoded Token:', decoded);
+//   }
+// });
 
 // JWT Verfication Middleware
 const authMiddleware = (req, res, next) => {
@@ -32,26 +32,23 @@ const authMiddleware = (req, res, next) => {
   const authHeader = req.headers['authorization'];
 
   if (authHeader) {
-    console.log('Authorization Header:', authHeader);
-    const token = req.headers['authorization']?.split(' ')[1];
-    
-    console.log('Extracted Token:', token);
-    // console.log('Using JWT Secret:', process.env.JWT_SECRET, {
-    //   expiresIn: '1h',
-    // };
+
+    console.log(authHeader.split(' ')[1]);
+    const token = authHeader.split(' ')[1];
+  
     if (!token) {
       console.error('Token is undefined');
       return res.sendStatus(401);
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        console.error('JWT Error:', err.message, 'Token:', token);
-        console.log('Verifying Token:', token);
 
-        return res.sendStatus(401);
+        console.log('error with token:', token);
+
+        return res.status(401).send({ message: `error with ${token}`});
       }
-      req.user = user;
+      req.user = decoded.id;
       console.log('Authenticated user:', req.user);
       next();
     });
@@ -168,6 +165,7 @@ app.get('/api/characters', authMiddleware, async (req, res) => {
 
 app.post('/api/characters', authMiddleware, async (req, res, next) => {
   try {
+    console.log(req.user.id);
     const characterData = {
       ...req.body,
       userId: req.user.id,
