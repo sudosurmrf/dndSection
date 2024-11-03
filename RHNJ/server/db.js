@@ -46,8 +46,7 @@ const createCharacter = async ({
   ideals, 
   flaws,    
   notes,     
-  createdAt,
-  updatedAt
+  createdAt
 }) => {
   return await prisma.userCharacter.create({
     data: {
@@ -127,7 +126,6 @@ const updateUser = async ({ id, username, password }) => {
 
 // Function to update character
 const updateCharacter = async ({
-  id,
   characterName,
   characterClass,
   characterLevel,
@@ -139,25 +137,44 @@ const updateCharacter = async ({
   intelligence,
   wisdom,
   charisma,
-  statusPoints,
-  abilities,
+  savingThrows,
+  skills,  
+  singleUseSkill, 
+  statusPoints, 
+  attackRoll, 
+  catchPhrases, 
+  abilities,      
+  ideals, 
+  flaws,    
+  notes,     
+  updatedAt
 }) => {
   return await prisma.userCharacter.update({
     where: { id },
     data: {
       characterName,
-      characterClass,
-      characterLevel,
-      characterImage,
-      userId,
-      strength,
-      dexterity,
-      constitution,
-      intelligence,
-      wisdom,
-      charisma,
-      statusPoints,
-      abilities,
+  characterClass,
+  characterLevel,
+  characterImage,
+  userId,
+  strength,
+  dexterity,
+  constitution,
+  intelligence,
+  wisdom,
+  charisma,
+  savingThrows,
+  skills,  
+  singleUseSkill, 
+  statusPoints, 
+  attackRoll, 
+  catchPhrases, 
+  abilities,      
+  ideals, 
+  flaws,    
+  notes,     
+  createdAt,
+  updatedAt
     },
   });
 };

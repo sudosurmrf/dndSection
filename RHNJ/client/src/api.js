@@ -1,11 +1,11 @@
-// client/src/api.js
 const baseURL = 'http://localhost:3000/api';
 
 // Helper function to handle fetch requests
 const request = async (endpoint, method = 'GET', data = null, token = null) => {
   try {
     const headers = { 'Content-Type': 'application/json' };
-    if (token) headers['Authorization'] = `Bearer ${token}`
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
     const config = {
       method,
       headers,
@@ -18,7 +18,8 @@ const request = async (endpoint, method = 'GET', data = null, token = null) => {
     const response = await fetch(`${baseURL}${endpoint}`, config);
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+      const errorData = await response.json(); // Try to get error details
+      throw new Error(`Error: ${response.statusText}, Details: ${errorData.error || 'No additional error info'}`);
     }
 
     return await response.json();
@@ -29,7 +30,6 @@ const request = async (endpoint, method = 'GET', data = null, token = null) => {
 };
 
 // Authentication functions
-
 export const signup = async (userData) => {
   return await request('/auth/signup', 'POST', userData);
 };
@@ -38,14 +38,12 @@ export const login = async (userData) => {
   return await request('/auth/login', 'POST', userData);
 };
 
-// Logout function
 export const logout = () => {
   localStorage.removeItem('token'); // Clear the token from local storage
   console.log('User logged out');
-  // Add any other cleanup actions if necessary
 };
 
-// Characters
+// Character functions
 export const fetchCharacters = (token) => {
   return request('/characters', 'GET', null, token);
 };
@@ -54,13 +52,18 @@ export const createCharacter = (token, characterData) => {
   return request('/characters', 'POST', characterData, token);
 };
 
-// Add more API functions as needed
+// User functions
 export const fetchUsers = (token) => {
   return request('/users', 'GET', null, token);
 };
 
+// Other API functions as needed
 export const deleteUser = (token, userId) => {
   return request(`/users/${userId}`, 'DELETE', null, token);
+};
+
+export const fetchUser = (token, userId) => {
+  return request(`/users/${userId}`, 'GET', null, token);
 };
 
 export const updateUser = (token, userId, userData) => {
