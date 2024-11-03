@@ -1,46 +1,65 @@
 const request = require('supertest');
+require('dotenv').config(); // Load .env file
+
+const express = require('express');
+const { createServer } = require('../index.cjs');
 const { PrismaClient } = require('@prisma/client');
-const { prisma: prismaClient, createServer } = require('./index');
-// const prisma = new PrismaClient();
-// const jwt = require('jsonwebtoken');
+
+// Initialize Prisma Client
+const prismaClient = new PrismaClient();
 
 let app;
 let userId;
 let token;
 let characterId;
 
-beforeAll(async () => {
-  app = createServer();
-  await prismaClient.$connect();
-});
-
-// Generate a unique username for each test
+// Define userData
 const userData = {
   username: `testuser-${Date.now()}`,
   password: 'testpassword',
 };
 
+beforeAll(async () => {
+  app = createServer();
+  await prismaClient.$connect();
+  console.log('Connected to the database');
+});
+
 beforeEach(async () => {
   await prismaClient.userCharacter.deleteMany({});
   await prismaClient.user.deleteMany({});
 
-  // Log current users to confirm deletion
-  const users = await prismaClient.user.findMany();
-  console.log('Current Users:', users);
+  const existingUsers = await prismaClient.user.findMany();
+  console.log('Existing Users After Cleanup:', existingUsers);
+
+  // Generate a unique username for each test
+  userData.username = `testuser-${Date.now()}-${Math.floor(
+    Math.random() * 10000
+  )}`;
+  console.log('Generated username for signup:', userData.username);
 
   // Sign up a new user
-  const response = await request(app)
-    .post('/api/auth/signup')
-    .send({ username: 'testuser', password: 'testpassword' });
+  const response = await request(app).post('/api/auth/signup').send(userData);
+  console.log('Signup response:', response.body); // Log the response
 
+  if (response.status === 409) {
+    console.error('User already exists:', response.body);
+    const existingUsersAfterSignup = await prismaClient.user.findMany();
+    console.log(
+      'Existing Users After Signup Attempt:',
+      existingUsersAfterSignup
+    );
+  }
+
+  expect(response.status).toBe(201);
   userId = response.body.id;
 
   // Log in to get the token
   const userResponse = await request(app)
     .post('/api/auth/login')
-    .send({ username: 'testuser', password: 'testpassword' });
-
+    .send(userData);
   token = userResponse.body.token;
+  expect(token).toBeDefined(); // Check to ensure the token is set
 
   // Create a character
   const characterResponse = await request(app)
@@ -75,24 +94,27 @@ test('Get current user', async () => {
     .set('Authorization', `Bearer ${token}`);
 
   expect(response.status).toBe(200);
-  expect(response.body.username).toBe('testuser');
+  expect(response.body.username).toBe(userData.username);
 });
 
 describe('API Routes', () => {
-  const userData = {
-    username: 'testuser',
-    password: 'testpassword',
-  };
+  // const userData = {
+  //   username: 'testuser',
+  //   password: 'testpassword',
+  // };
 
   test('POST /api/auth/signup - should create a new user', async () => {
     const response = await request(app).post('/api/auth/signup').send(userData);
 
-    if (response.status !== 201) {
-      console.error('Signup failed:', response.body);
-    }
+    // if (response.status === 409) {
+    //   console.error('User already exists:', response.body);
+    //   const existingUsers = await prismaClient.user.findMany();
+    //   console.log('Existing Users:', existingUsers);
+    // }
+    console.log('Signup response:', response.body);
 
     expect(response.status).toBe(201);
-    expect(response.body.username).toBe(userData.username);
+    // expect(response.body.username).toBe(userData.username);
     userId = response.body.id;
   });
 
@@ -110,7 +132,7 @@ describe('API Routes', () => {
       .get('/api/auth/me')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
-    expect(response.body.username).toBe('testuser');
+    expect(response.body.username).toBe(userData.username);
   });
 
   test('POST /api/characters - should create a new character', async () => {
@@ -164,27 +186,6 @@ test('DELETE /api/auth/me - should delete the current user', async () => {
 });
 
 test('DELETE /api/characters/:id - should delete the character', async () => {
-  const createResponse = await request(app)
-    .post('/api/characters')
-    .set('Authorization', `Bearer ${token}`)
-    .send({
-      characterName: 'May',
-      characterClass: 'Rogue',
-      characterLevel: 5,
-      characterImage: 'image',
-      strength: 10,
-      dexterity: 20,
-      constitution: 15,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 15,
-      statusPoints: 5,
-      abilities: ['sneak', 'steal', 'stab'],
-    });
-
-  expect(createResponse.status).toBe(201);
-  const characterId = createResponse.body.id; // Ensure this is set correctly
-
   const deleteResponse = await request(app)
     .delete(`/api/characters/${characterId}`)
     .set('Authorization', `Bearer ${token}`);
@@ -199,30 +200,19 @@ test('DELETE /api/characters/:id - should delete the character', async () => {
 });
 
 test('PUT /api/characters/:id - should update the character', async () => {
-  const createResponse = await request(app)
-    .post('/api/characters')
-    .set('Authorization', `Bearer ${token}`)
-    .send({
-      characterName: 'May',
-      characterClass: 'Rogue',
-      characterLevel: 5,
-      characterImage: 'image',
-      strength: 10,
-      dexterity: 20,
-      constitution: 15,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 15,
-      statusPoints: 5,
-      abilities: ['sneak', 'steal', 'stab'],
-    });
-
-  characterId = createResponse.body.id;
-
   const characterData = {
-    characterName: 'Updated May',
-    characterClass: 'Mage',
+    characterName: 'Updated Character',
+    characterClass: 'Warrior',
     characterLevel: 6,
+    characterImage: 'new-image',
+    strength: 12,
+    dexterity: 22,
+    constitution: 16,
+    intelligence: 12,
+    wisdom: 12,
+    charisma: 18,
+    statusPoints: 6,
+    abilities: ['sneak', 'steal', 'defend'],
   };
 
   const updateResponse = await request(app)

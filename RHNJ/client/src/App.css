@@ -45,7 +45,6 @@
 
 html {
   height: 100%;
-  
 }
 
 .login-box {
@@ -55,9 +54,9 @@ html {
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
 
@@ -85,13 +84,13 @@ html {
 }
 .login-box .user-box label {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
   pointer-events: none;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .login-box .user-box input:focus ~ label,
@@ -111,224 +110,7 @@ html {
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
-  transition: .5s;
+  transition: 0.5s;
   margin-top: 40px;
-  letter-spacing: 4px
-}
-
-
-/*from https://codepen.io/pineapplechunk/pen/AoegBq */ 
-/* .wrapper {
-  width: 900px;
-  height: 600px;
-  border-top: 1px solid #e2e2e2;
-  margin: 50px auto;
-  border: 1px solid #CCCCCC;
-}
-  
- .tab {
-   position: absolute;
-    width: 900px;
-    height: 600px;
-    background-color: #e8e8e8;
-    border-radius: 6px;
-    border-top-left-radius: 0px;
-  padding: 20px;
-  }
-
-  #bt1 {
-    background-color: #7BCAE1;
-    border-top-left-radius: 3px;
-  
-    left: -1px;
-    
-  }
-  
-  #bt2 {
-    background-color: #FF7575;
-    left: 97px;
-  }
-  
-  #bt3 {
-    background-color: #A6CAA9;
-    left: 196px;
-  }
-  
-  #bt3:hover, #bt2:hover, #bt1:hover {
-    opacity: 1;
-    transition: opacity ease 100ms;
-  } */
-  
-  /*  .button {
-    
-      width: 100px;
-    height: 30px;
-        position: absolute;
-      top: -30px;
-      border-radius: 3px;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    border-bottom-right-radius: 0;
-    opacity: 0.8;
-    z-index: 2;
-    transition: all ease 100ms;
-    /*border-right: 1px solid #7D7D7D;
-  }  */
-  
-  /* .button.selected {
-    top: -40px;
-    height: 40px;
-    z-index: 1;
-    opacity: 1;
-  }
-  
-  .active {
-    z-index: 1;
-  }
-  
-  .tab > h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin: 25% auto;
-    font-size: 3em;
-    letter-spacing: 6px;
-    color: #DDDDDD;
-  } */
-  
-  /*
-  Form Styling
-  */
-  
-/*   form {
-    width: 33%;
-    height: 600px;
-    display: inline-block;
-    overflow: hidden;
-  } */
-
-  /*
-Legend Styling
-*/
-/* legend {
-  font-weight: bold;
-  font-size: 1.5em;
-  color: #7BCAE1;
-}
-
-legend:after {
-  content: "";
-  display: block;
-  width: 100px;
-  height: 1px;
-  border-bottom: 2px solid #DDDDDD;
-} */
-
-/*
-Input Styling
-*/
-
-/* label {
-  position: relative;
-  padding-bottom: 10px;
-  display: inline-block;
-  float: left;
-  clear: left;
-  width: 80px;
-  padding-top: 6px;
-  margin-bottom: 5px;
-  text-align: center;
-  margin-right: 20px;
-}
-
-input {
-  margin-bottom: 10px;
-  border-radius: 
-}
-
-.small {
-    width: 30px;
-    display: inline-block;
-    margin-right: 5px;
-} */
-
-/*
-Basic Info Styling
-*/
-
-/*
-Stat Styling
-*/
-
-/* #stats .table-header td{
-  font-size: 11px;
-  position: relative;
-  display: inline-block;
-  left: 70px;
-  margin-left: 8px;
-}
-
-
-
-
-#stats label {
-  display: inline-block;
-  width: 60px;
-  padding-top: 6px;
-  border-radius: 3px;
-  background-color: #666666;
-  color: #ffffff;
-  border: none;
-}
-
-#stats input {
-  margin-bottom: 20px;
-} */
-
-/* from https://codepen.io/terminalGradience/pen/ENQRpp /*
-
-body{
-  background-color: #222;
-  color: #CCC;
-}
-
-.vertField{
-  float: left;
-  margin-right: 10px;
-}
-
-td{
-  width: 50px;
-  padding: 2px 5px;
-  background-color: #333;
-  vertical-align: center;
-  text-align: center;
-}
-
-.outcol{
-  width: 75px;
-}
-
-.statfield{
-  width:30px;
-  text-align:center;
-}
-
-.atkfield{
-  width:40px;
-  text-align:center;
-}
-
-form, p{
-  background-color: #333;
-  padding: 5px 10px;
-  margin: 2px;
-  line-height: 175%;
-}
-
-.removeBtn{
-  float:right;
-}
-
-.prototype{
-  display:none;
+  letter-spacing: 4px;
 }

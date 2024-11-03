@@ -102,12 +102,8 @@ const PlayerHome = () => {
               <td>{character.name}</td>
               <td>{character.level}</td>
               <td>
-                <button onClick={() => handleDelete(character.id)}>
-                  Delete
-                </button>
-                <button onClick={() => setSelectedCharacter(character)}>
-                  View Details
-                </button>
+              <button onClick={() => handleDelete(character.id)}>Delete</button>
+              <button onClick={() => setSelectedCharacter(character)}>View Details</button>
               </td>
             </tr>
           ))}

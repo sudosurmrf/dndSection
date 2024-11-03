@@ -1,58 +1,87 @@
-// client/src/api.js
-import axios from 'axios';
+const baseURL = 'http://localhost:3000/api';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3000/api', // Adjust according to your backend
-});
+// Helper function to handle fetch requests
+const request = async (endpoint, method = 'GET', data = null, token = null) => {
+  try {
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
-// Authentication
+    const config = {
+      method,
+      headers,
+    };
+
+    if (data) {
+      config.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(`${baseURL}${endpoint}`, config);
+
+    if (!response.ok) {
+      const errorData = await response.json(); // Try to get error details
+      throw new Error(`Error: ${response.statusText}, Details: ${errorData.error || 'No additional error info'}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error with request:', error);
+    throw error;
+  }
+};
+
+// Authentication functions
 export const signup = async (userData) => {
-  return await api.post('/auth/signup', userData);
+  return await request('/auth/signup', 'POST', userData);
 };
 
 export const login = async (userData) => {
-  return await api.post('/auth/login', userData);
+  return await request('/auth/login', 'POST', userData);
 };
 
-// Logout function
 export const logout = () => {
   localStorage.removeItem('token'); // Clear the token from local storage
   console.log('User logged out');
-  // Add any other cleanup actions if necessary
 };
 
-// Characters
-export const fetchCharacters = (token) =>
-  api.get('/characters', { headers: { Authorization: `Bearer ${token}` } });
+// Character functions
+export const fetchCharacters = (token) => {
+  return request('/characters', 'GET', null, token);
+};
 
-export const createCharacter = (token, characterData) =>
-  api.post('/characters', characterData, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const createCharacter = (token, characterData) => {
+  return request('/characters', 'POST', characterData, token);
+};
 
-// Add more API functions as needed
-export const fetchUsers = (token) =>
-  api.get('/users', { headers: { Authorization: `Bearer ${token}` } });
+// User functions
+export const fetchUsers = (token) => {
+  return request('/users', 'GET', null, token);
+};
 
-/* export const deleteUser = (token, userId) =>
-  api.delete(`/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
+// Other API functions as needed
+export const deleteUser = (token, userId) => {
+  return request(`/users/${userId}`, 'DELETE', null, token);
+};
 
-export const fetchUser = (token, userId) =>
-  api.get(`/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } }); 
+export const fetchUser = (token, userId) => {
+  return request(`/users/${userId}`, 'GET', null, token);
+};
 
-export const updateUser = (token, userId, userData) =>
-  api.put(`/users/${userId}`, userData, { headers: { Authorization: `Bearer ${token}` } });
+export const updateUser = (token, userId, userData) => {
+  return request(`/users/${userId}`, 'PUT', userData, token);
+};
 
-export const fetchUserCharacters = (token, userId) =>
-  api.get(`/users/${userId}/characters`, { headers: { Authorization: `Bearer ${token}` } });
+export const fetchUserCharacters = (token, userId) => {
+  return request(`/users/${userId}/characters`, 'GET', null, token);
+};
 
-export const fetchCharacter = (token, characterId) =>
-  api.get(`/characters/${characterId}`, { headers: { Authorization: `Bearer ${token}` } });
+export const fetchCharacter = (token, characterId) => {
+  return request(`/characters/${characterId}`, 'GET', null, token);
+};
 
-export const updateCharacter = (token, characterId, characterData) =>
-  api.put(`/characters/${characterId}`, characterData, { headers: { Authorization: `Bearer ${token}` } });
+export const updateCharacter = (token, characterId, characterData) => {
+  return request(`/characters/${characterId}`, 'PUT', characterData, token);
+};
 
-export const deleteCharacter = (token, characterId) =>
-  api.delete(`/characters/${characterId}`, { headers: { Authorization: `Bearer ${token}` } });
-
-export default api; */
+export const deleteCharacter = (token, characterId) => {
+  return request(`/characters/${characterId}`, 'DELETE', null, token);
+};
