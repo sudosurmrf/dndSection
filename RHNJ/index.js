@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(cors()); // Added this line
 app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
 const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';
 const payload = { id: 1 };
@@ -31,10 +32,7 @@ function authMiddleware(req, res, next) {
   if (authHeader) {
     console.log('Authorization Header:', authHeader);
     const token = authHeader.split(' ')[1];
-    console.log('Extracted Token:', token);
-    // console.log('Using JWT Secret:', process.env.JWT_SECRET, {
-    //   expiresIn: '1h',
-    // };
+    
     if (!token) {
       console.error('Token is undefined');
       return res.sendStatus(401);
@@ -43,7 +41,7 @@ function authMiddleware(req, res, next) {
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {
         console.error('JWT Error:', err.message, 'Token:', token);
-        return res.sendStatus(401);
+        return res.sendStatus(403);
       }
       req.user = user;
       console.log('Authenticated user:', req.user);
