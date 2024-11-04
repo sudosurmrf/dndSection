@@ -154,14 +154,20 @@ app.post('/api/characters',  async (req, res, next) => {
     }
     const token = authHeader.split(' ')[1];
     console.log(token);
-    const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
-    if(!verifiedUser) {
-      return res.status(403).json({ message: 'invalid token' });
+    let verifiedUser;
+    try {
+      verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      console.error('JWT Verification Failed:', err);
+      return res.status(403).json({ message: 'Invalid token' });
     }
+
+    console.log('Verified User:', verifiedUser);
     const userExists = await prisma.user.findUnique({
       where: { id: verifiedUser.id },
     });
 
+    console.log('User Exists:', userExists);
     if (!userExists) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -176,7 +182,7 @@ app.post('/api/characters',  async (req, res, next) => {
     res.status(201).json(character);
   }catch(err){
     console.error('Couldnt create char, stuck in index: ', err);
-    next(err);
+    res.status(500).json({ message: 'could not create the char successfully', error: err.message});
   }
 });
   

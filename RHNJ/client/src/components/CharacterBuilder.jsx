@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import characters from '../utils/characterList';
 import { createCharacter } from '../api';
+import { deleteUserCharacter } from '../functions/userFunctions';
 
-const CharacterBuilder = ({ onCharacterSelect }) => {
+const CharacterBuilder = ({ onCharacterSelect, setCharacters }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterDetails, setCharacterDetails] = useState({});
@@ -68,24 +69,55 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
         const data = await response.json();
         console.log('Character saved:', data);
 
-        setSelectedCharacter(null); // Clear selected character
+        setSelectedCharacter(null);
       } catch (error) {
         console.error('Error saving character:', error);
       }
   };
   
-
+  const handleDelete = async (characterId) => {
+    try {
+      await deleteUserCharacter(characterId);
+      setCharacters((prevCharacters) =>
+        prevCharacters.filter((char) => char.id !== characterId)
+      );
+    } catch (err) {
+      console.error('Failed to delete character. Please try again.', err);
+    }
+  };
 
   return (
     <div>
       {/* Character Dropdown */}
       <label htmlFor='character-select'>Choose a Character:</label>
+      <h3>Your Characters</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {characters.map((character) => (
+            <tr key={character.id}>
+              <td>{character.name}</td>
+              <td>{character.level}</td>
+              <td>
+              <button onClick={() => handleDelete(character.id)}>Delete</button>
+              <button onClick={() => setSelectedCharacter(character)}>View Details</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <select
         id='character-select'
         value={selectedCharacterId}
         onChange={handleCharacterChange}
       >
-        <option value=''>-- Select a Character --</option>
+        <option value=''>-- Create a new character--</option>
 
         {characters.map((character) => (
           <option key={character.id} value={character.id}>
