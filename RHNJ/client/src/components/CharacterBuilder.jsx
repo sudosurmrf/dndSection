@@ -17,7 +17,6 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
 
     // Find the selected character based on ID
     const character = characters.find((char) => char.id === characterId);
-    console.log(character);
     setSelectedCharacterId(characterId);
     setSelectedCharacter(character);
 
@@ -29,17 +28,18 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
   const saveCharacterDetails = async () => {
     let characterData = {
       userId: selectedCharacter.userId,
-      characterId: selectedCharacter.id,
       level: selectedCharacter.level,
       characterName: characterName,
-      class: selectedCharacter.class,
+      characterClass: selectedCharacter.characterClass,
       image: selectedCharacter.image,
-      strength: selectedCharacter.attributes.strength,
-      dexterity: selectedCharacter.attributes.dexterity,
-      constitution: selectedCharacter.attributes.constitution,
-      intelligence: selectedCharacter.attributes.intelligence,
-      wisdom: selectedCharacter.attributes.wisdom,
-      charisma: selectedCharacter.attributes.charisma,
+      attributes: {
+        strength: selectedCharacter.attributes.strength,
+        dexterity: selectedCharacter.attributes.dexterity,
+        constitution: selectedCharacter.attributes.constitution,
+        intelligence: selectedCharacter.attributes.intelligence,
+        wisdom: selectedCharacter.attributes.wisdom,
+        charisma: selectedCharacter.attributes.charisma,
+      },
       savingThrows: selectedCharacter.attributes.savingThrows,
       skills: selectedCharacter.skills,
       singleUseSkill: selectedCharacter.singleUseSkill,
@@ -54,9 +54,12 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
     setCharacterDetails(characterData);
     console.log(characterData);
     const token = localStorage.getItem('token');
-    // const saveCharacterDetails = async(characterData) => {
+    if(!token) {
+      console.error('No token in local Store');
+      return;
+    }
       try {
-        const response = await createCharacter(characterData, token);
+        const response = await createCharacter(token, characterData);
 
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
@@ -69,10 +72,9 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
       } catch (error) {
         console.error('Error saving character:', error);
       }
-    };
+  };
   
 
-  //     setSelectedCharacter(null);
 
   return (
     <div>
@@ -87,7 +89,7 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
 
         {characters.map((character) => (
           <option key={character.id} value={character.id}>
-            {character.class}
+            {character.characterClass}
           </option>
         ))}
       </select>

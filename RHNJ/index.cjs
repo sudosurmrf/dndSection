@@ -12,48 +12,31 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // Added this line
 app.use(express.json());
 
-// const secret = process.env.JWT_SECRET || 'itsLeviosaaaa';
-// const payload = { id: 1 };
-
-// const token = jwt.sign(payload, secret);
-// console.log('Generated Token:', token);
-
-// jwt.verify(token, secret, (err, decoded) => {
-//   if (err) {
-//     console.error('Verification Error:', err);
-//   } else {
-//     console.log('Decoded Token:', decoded);
-//   }
-// });
-
 // JWT Verfication Middleware
 const authMiddleware = (req, res, next) => {
   console.log('Request Headers:', req.headers);
   const authHeader = req.headers['authorization'];
 
-  if (authHeader) {
-
-    console.log(authHeader.split(' ')[1]);
-    const token = authHeader.split(' ')[1];
-  
-    if (!token) {
-      console.error('Token is undefined');
-      return res.sendStatus(401);
-    }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        console.log('error with token:', token);
-        return res.status(401).send({ message: `error with ${token}`});
-      }
-      req.user = decoded.id;
-      console.log('Authenticated user:', req.user);
-      next();
-    });
-  } else {
-    console.error('No authorization header found');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    console.error('Authorization header missing or incorrectly formatted');
     return res.sendStatus(401);
   }
+
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    console.error('Token is undefined');
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.log('Error with token:', token);
+      return res.status(401).send({ message: 'Invalid token' });
+    }
+    req.user = decoded.id;
+    console.log('Authenticated user:', req.user);
+    next();
+  });
 };
 
 // Create Express server
@@ -129,7 +112,7 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
 // Delete current user
 app.delete('/api/auth/me', authMiddleware, async (req, res, next) => {
   try {
-    const userId = req.user.id; // Assuming you have the user's ID in req.user
+    const userId = req.user.id; 
 
     // Delete related user characters first
     await prisma.userCharacter.deleteMany({
@@ -163,30 +146,40 @@ app.get('/api/characters', authMiddleware, async (req, res) => {
 
 app.post('/api/characters',  async (req, res, next) => {
   try {
-    const characterData = req.body;
-    const authHeader = req.headers['authorization'];  
-    const token = authHeader && authHeader.split(' ')[1];
-    // console.log("this is the token: ", token);
-    console.log('this is the auth headers: ', authHeader);
+    const authHeader = req.headers['authorization'];//problem here
+    
 
-    if (!token) {
-      return res.status(401).json({ message: 'missing token' });
-    };
+    if(!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: "missing or wrong jwt"});
+    }
+    const token = authHeader.split(' ')[1];
+    console.log(token);
     const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
     if(!verifiedUser) {
-      return res.status(403).json({ message: 'Invalid token' });
+      return res.status(403).json({ message: 'invalid token' });
     }
+    const userExists = await prisma.user.findUnique({
+      where: { id: verifiedUser.id },
+    });
 
+    if (!userExists) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const characterData = {
+      ...req.body,
+      userId: verifiedUser.id,
+    };
     const character = await prisma.userCharacter.create({
       data: characterData,
     });
-    console.log('Created Character:', character);
+    console.log('character created!!: ', character);
     res.status(201).json(character);
-  } catch (error) {
-    console.error('Error creating character:', error);
-    next(error);
+  }catch(err){
+    console.error('Couldnt create char, stuck in index: ', err);
+    next(err);
   }
 });
+  
 
 app.delete('/api/characters/:id', authMiddleware, async (req, res, next) => {
   try {
