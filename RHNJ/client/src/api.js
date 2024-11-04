@@ -18,8 +18,14 @@ const request = async (endpoint, method = 'GET', data = null, token = null) => {
     const response = await fetch(`${baseURL}${endpoint}`, config);
 
     if (!response.ok) {
-      const errorData = await response.json(); // Try to get error details
-      throw new Error(`Error: ${response.statusText}, Details: ${errorData.error || 'No additional error info'}`);
+      let errorData = null;
+      try{
+        errorData = await response.json();
+      }catch(parseError) {
+        console.error('Error when trying to parse the JSON: ',parseError);
+      }
+      const errorDetails = errorData?.error || 'No additional error info to provide';
+      throw new Error(`Error: ${response.status} ${response.statusText}, Details: ${errorDetails}`);
     }
 
     return await response.json();
@@ -49,30 +55,8 @@ export const fetchCharacters = (token) => {
 };
 
 export const createCharacter = (token, characterData) => {
-  console.log(token);
   return request('/characters', 'POST', characterData, token)
 }
-// export const createCharacter = async (req, res, next) => {
-//   try{
-//     const { characterData, token } = req.body;
-
-//     const character = await fetch(`${baseURL}/characters`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({ characterData: characterData})
-//     });
-//     const results = await character.json();
-//     res.json(results);
-//     // res.status(201).json({ message:  'character created!', character});
-
-//   }catch(err) {
-//     res.status(401).json({ message: `character not created`, err});
-//   }
-// };
-
 // User functions
 export const fetchUsers = (token) => {
   return request('/users', 'GET', null, token);

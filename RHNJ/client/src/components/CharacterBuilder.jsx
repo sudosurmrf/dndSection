@@ -68,7 +68,7 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
         const data = await response.json();
         console.log('Character saved:', data);
 
-        setSelectedCharacter(null); // Clear selected character
+        setSelectedCharacter(null);
       } catch (error) {
         console.error('Error saving character:', error);
       }
