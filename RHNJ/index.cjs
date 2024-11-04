@@ -43,9 +43,7 @@ const authMiddleware = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-
         console.log('error with token:', token);
-
         return res.status(401).send({ message: `error with ${token}`});
       }
       req.user = decoded.id;
@@ -163,15 +161,21 @@ app.get('/api/characters', authMiddleware, async (req, res) => {
   }
 });
 
-app.post('/api/characters', authMiddleware, async (req, res, next) => {
+app.post('/api/characters',  async (req, res, next) => {
   try {
-    console.log(req.user.id);
-    const characterData = {
-      ...req.body,
-      userId: req.user.id,
+    const characterData = req.body;
+    const authHeader = req.headers['authorization'];  
+    const token = authHeader && authHeader.split(' ')[1];
+    // console.log("this is the token: ", token);
+    console.log('this is the auth headers: ', authHeader);
+
+    if (!token) {
+      return res.status(401).json({ message: 'missing token' });
     };
-    console.log('Character Data:', characterData);
-    console.log('Request Body:', req.body);
+    const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+    if(!verifiedUser) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
 
     const character = await prisma.userCharacter.create({
       data: characterData,
@@ -222,23 +226,6 @@ app.put('/api/characters/:id', authMiddleware, async (req, res, next) => {
     next(error);
   }
 });
-
-app.post(
-  'http://localhost:3000/api/characters/save-character',
-  async (req, res) => {
-    console.log("reached the server");
-    try {
-      const characterData = req.body;
-      const savedCharacter = await prisma.userCharacter.create({
-        data: characterData,
-      });
-      res.status(200).json(savedCharacter);
-    } catch (error) {
-      console.error('Error saving character:', error);
-      res.status(500).json({ error: 'Error saving character' });
-    }
-  }
-);
 
 app.get('/api/users', async (req, res, next) => {
   try {
