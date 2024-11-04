@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import characters from '../utils/characterList';
 import { createCharacter } from '../api';
+import { deleteUserCharacter } from '../functions/userFunctions';
 
-const CharacterBuilder = ({ onCharacterSelect }) => {
+const CharacterBuilder = ({ onCharacterSelect, setCharacters }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterDetails, setCharacterDetails] = useState({});
@@ -74,7 +75,16 @@ const CharacterBuilder = ({ onCharacterSelect }) => {
       }
   };
   
-
+  const handleDelete = async (characterId) => {
+    try {
+      await deleteUserCharacter(characterId);
+      setCharacters((prevCharacters) =>
+        prevCharacters.filter((char) => char.id !== characterId)
+      );
+    } catch (err) {
+      console.error('Failed to delete character. Please try again.', err);
+    }
+  };
 
   return (
     <div>
